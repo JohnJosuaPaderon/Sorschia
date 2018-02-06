@@ -1,0 +1,8 @@
+{
+    "connectionstrings": [
+        {
+            "key": "Core",
+            "value": "SERVER=localhost\\SQLEXPRESS;DATABASE=SorschiaDailyTask;USER ID=sorschia;PASSWORD=sorschia;"
+        }
+    ]
+}
