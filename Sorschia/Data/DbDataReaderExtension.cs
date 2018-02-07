@@ -19,11 +19,6 @@ namespace Sorschia.Data
                 throw new ArgumentException("fieldname is set to null or white space.", nameof(fieldName));
             }
 
-            if (reader == null)
-            {
-                throw new ArgumentNullException(nameof(reader));
-            }
-
             if (reader.FieldCount <= 0)
             {
                 throw new ArgumentException("reader has not fields.", nameof(reader));
