@@ -20,5 +20,11 @@
         {
             return UseProvidedValue ? Value : alternativeValue;
         }
+
+        public void Reset()
+        {
+            UseProvidedValue = false;
+            Value = default(T);
+        }
     }
 }
