@@ -7,8 +7,8 @@ namespace Sorschia.Data
 {
     public interface IDbCommandCreator<T> where T : DbCommand
     {
-        T Create(IDbQuery query, IProcessContext context);
-        Task<T> CreateAsync(IDbQuery query, IProcessContext context);
-        Task<T> CreateAsync(IDbQuery query, IProcessContext context, CancellationToken cancellationToken);
+        T Create(IProcessContext context, IDbQuery query);
+        Task<T> CreateAsync(IProcessContext context, IDbQuery query);
+        Task<T> CreateAsync(IProcessContext context, IDbQuery query, CancellationToken cancellationToken);
     }
 }

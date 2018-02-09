@@ -1,4 +1,5 @@
 ﻿using Sorschia.Process;
+using Sorschia.Security;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -18,10 +19,16 @@ namespace Sorschia.Data
         /// <summary>
         /// Initializes a new instance of <see cref="DbConnectionProviderBase{T}"/>
         /// </summary>
-        public DbConnectionProviderBase()
+        public DbConnectionProviderBase(IConnectionStringPool connectionStringPool)
         {
+            _ConnectionStringPool = connectionStringPool;
             _Source = new Dictionary<IProcessContext, T>();
         }
+
+        /// <summary>
+        /// Read-only source of connection strings
+        /// </summary>
+        private readonly IConnectionStringPool _ConnectionStringPool;
 
         /// <summary>
         /// Read-only source of database connections
@@ -29,23 +36,18 @@ namespace Sorschia.Data
         private readonly Dictionary<IProcessContext, T> _Source;
 
         /// <summary>
-        /// Instantiate an concrete instance of <see cref="DbConnection"/>
+        /// Instantiate a concrete instance of <see cref="DbConnection"/>
         /// </summary>
         protected abstract T Instantiate();
 
         /// <summary>
-        /// Gets the connection string from context
+        /// Instantiate a concrete instance of <see cref="DbConnection"/>
         /// </summary>
-        private SecureString GetConnectionString(IProcessContext context)
+        private T Instantiate(IProcessContext context)
         {
-            if (context is DbProcessContext dbContext)
-            {
-                return dbContext.SecureConnectionString;
-            }
-            else
-            {
-                throw new DbConnectionProviderException("process context instance is not suitable for database processes.");
-            }
+            var result = Instantiate();
+            result.ConnectionString = SecureStringConverter.Convert(_ConnectionStringPool.Get(context));
+            return result;
         }
 
         /// <summary>
@@ -56,6 +58,7 @@ namespace Sorschia.Data
             if (!_Source.ContainsKey(context))
             {
                 _Source.Add(context, connection);
+                ProcessContext.TryAddFinalizer(context, Finalize);
             }
         }
 
@@ -66,7 +69,7 @@ namespace Sorschia.Data
         {
             try
             {
-                var connection = Instantiate();
+                var connection = Instantiate(context);
                 connection.Open();
                 Register(context, connection);
                 return connection;
@@ -84,7 +87,7 @@ namespace Sorschia.Data
         {
             try
             {
-                var connection = Instantiate();
+                var connection = Instantiate(context);
                 await connection.OpenAsync();
                 Register(context, connection);
                 return connection;
@@ -102,7 +105,7 @@ namespace Sorschia.Data
         {
             try
             {
-                var connection = Instantiate();
+                var connection = Instantiate(context);
                 await connection.OpenAsync(cancellationToken);
                 Register(context, connection);
                 return connection;

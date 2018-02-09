@@ -2,7 +2,7 @@
 
 namespace Sorschia.Data
 {
-    public sealed class DbQueryParameter
+    public sealed class DbQueryParameter : IDbQueryParameter
     {
         public static DbQueryParameter Input(string name, object value)
         {

@@ -65,6 +65,7 @@ namespace Sorschia.Data
                 var connection = _ConnectionProvider.Get(context);
                 var transaction = BeginTransaction(connection);
                 _Source.Add(context, transaction);
+                ProcessContext.TryAddFinalizer(context, Finalize);
                 return transaction;
             }
         }

@@ -12,8 +12,11 @@ namespace Sorschia.Data
         where TCommand : DbCommand
         where TParameter : DbParameter
     {
-        public DbCommandCreatorBase(Action<TCommand, TParameter> addParameter)
+        public DbCommandCreatorBase(IDbConnectionProvider<TConnection> connectionProvider, IDbTransactionProvider<TTransaction> transactionProvider, IDbQueryParameterConverter<TParameter> parameterConverter, Action<TCommand, TParameter> addParameter)
         {
+            _ConnectionProvider = connectionProvider;
+            _TransactionProvider = transactionProvider;
+            _ParameterConverter = parameterConverter;
             _AddParameter = addParameter;
         }
 
@@ -36,17 +39,17 @@ namespace Sorschia.Data
             return command;
         }
 
-        public TCommand Create(IDbQuery query, IProcessContext context)
+        public TCommand Create(IProcessContext context, IDbQuery query)
         {
             return Create(query, _ConnectionProvider.Get(context), _TransactionProvider.Get(context));
         }
 
-        public async Task<TCommand> CreateAsync(IDbQuery query, IProcessContext context)
+        public async Task<TCommand> CreateAsync(IProcessContext context, IDbQuery query)
         {
             return Create(query, await _ConnectionProvider.GetAsync(context), _TransactionProvider.Get(context));
         }
 
-        public async Task<TCommand> CreateAsync(IDbQuery query, IProcessContext context, CancellationToken cancellationToken)
+        public async Task<TCommand> CreateAsync(IProcessContext context, IDbQuery query, CancellationToken cancellationToken)
         {
             return Create(query, await _ConnectionProvider.GetAsync(context, cancellationToken), _TransactionProvider.Get(context));
         }
