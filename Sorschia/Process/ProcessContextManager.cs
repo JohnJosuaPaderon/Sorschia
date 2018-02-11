@@ -52,8 +52,10 @@ namespace Sorschia.Process
 
         public IProcessContext Initialize()
         {
-            var context = new ProcessContext(this);
-            context.Status = ProcessContextStatus.Initialized;
+            var context = new ProcessContext(this)
+            {
+                Status = ProcessContextStatus.Initialized
+            };
             return context;
         }
     }
