@@ -8,6 +8,9 @@
     <Authors>John Josua R. Paderon</Authors>
     <Description>Sorschia Library.</Description>
     <Copyright>Copyright (c) 2018 John Josua R. Paderon</Copyright>
+    <Company>Sorschia</Company>
+    <PackageTags>Sorschia</PackageTags>
+    <PackageReleaseNotes>Total revision of Sorschia</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
