@@ -3,7 +3,7 @@
     /// <summary>
     /// Base-class for representational data models
     /// </summary>
-    public abstract class EntityBase<TId>
+    public abstract class EntityBase<TId> : IEntity<TId>
     {
         /// <summary>
         /// Identifier of data
