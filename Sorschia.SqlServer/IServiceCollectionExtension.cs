@@ -6,7 +6,7 @@ namespace Sorschia
 {
     public static class IServiceCollectionExtension
     {
-        public static IServiceCollection UseSqlServer(this IServiceCollection instance)
+        public static IServiceCollection UseSqlServerBase(this IServiceCollection instance)
         {
             return instance
                 .UseConnectionStringPool()
