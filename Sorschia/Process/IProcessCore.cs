@@ -2,7 +2,7 @@
 
 namespace Sorschia.Process
 {
-    public interface IProcessCore
+    public interface IProcessCore : IDisposable
     {
         Guid Key { get; }
     }
