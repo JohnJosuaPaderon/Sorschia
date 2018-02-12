@@ -1,5 +1,6 @@
 ﻿using Sorschia.Process;
 using System;
+using System.Data;
 using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,6 +31,17 @@ namespace Sorschia.Data
         private TCommand Create(IDbQuery query, TConnection connection, TTransaction transaction)
         {
             var command = Construct(connection, transaction);
+            command.CommandText = query.Command;
+
+            switch (query.Type)
+            {
+                case DbQueryType.Text:
+                    command.CommandType = CommandType.Text;
+                    break;
+                case DbQueryType.Procedure:
+                    command.CommandType = CommandType.StoredProcedure;
+                    break;
+            }
 
             foreach (var parameter in query.Parameters)
             {

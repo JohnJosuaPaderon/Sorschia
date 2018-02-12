@@ -24,7 +24,7 @@
         public void Reset()
         {
             UseProvidedValue = false;
-            Value = default(T);
+            _Value = default(T);
         }
     }
 }

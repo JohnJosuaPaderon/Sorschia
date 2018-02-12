@@ -45,7 +45,7 @@ namespace Sorschia.Data
                 {
                     transaction.Commit();
                 }
-
+                
                 transaction.Dispose();
                 _Source.Remove(context);
             }
@@ -66,6 +66,7 @@ namespace Sorschia.Data
                 var transaction = BeginTransaction(connection);
                 _Source.Add(context, transaction);
                 ProcessContext.TryAddFinalizer(context, Finalize);
+                ProcessContext.TryAddFinalizer(context, _ConnectionProvider.Finalize);
                 return transaction;
             }
         }

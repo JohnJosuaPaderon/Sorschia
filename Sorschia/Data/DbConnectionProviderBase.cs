@@ -58,7 +58,7 @@ namespace Sorschia.Data
             if (!_Source.ContainsKey(context))
             {
                 _Source.Add(context, connection);
-                ProcessContext.TryAddFinalizer(context, Finalize);
+                // ProcessContext.TryAddFinalizer(context, Finalize);
             }
         }
 
