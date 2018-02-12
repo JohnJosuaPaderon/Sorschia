@@ -10,31 +10,32 @@ namespace Sorschia.Process
         where TCommand : DbCommand
         where TConverter : IDbDataReaderConverter<T>
     {
-        public DbReadEnumerableProcessBase(IProcessContextManager contextManager, IDbProcessor<TCommand> processor, string schema = null) : base(contextManager, processor, schema)
+        public DbReadEnumerableProcessBase(IProcessContextManager contextManager, IDbProcessor<TCommand> processor, TConverter converter, string schema = null) : base(contextManager, processor, schema)
         {
+            _Converter = converter;
         }
 
         protected readonly TConverter _Converter;
 
-        protected abstract void PrepareConverter(TConverter converter);
+        protected virtual void PrepareConverter(TConverter converter)
+        {
+            _Converter.Reset();
+        }
 
         public IEnumerable<T> Execute(IProcessContext context)
         {
-            _Converter.Reset();
             PrepareConverter(_Converter);
             return _Processor.ExecuteReaderEnumerable(context, ConstructQuery(), _Converter);
         }
 
         public Task<IEnumerable<T>> ExecuteAsync(IProcessContext context)
         {
-            _Converter.Reset();
             PrepareConverter(_Converter);
             return _Processor.ExecuteReaderEnumerableAsync(context, ConstructQuery(), _Converter);
         }
 
         public Task<IEnumerable<T>> ExecuteAsync(IProcessContext context, CancellationToken cancellationToken)
         {
-            _Converter.Reset();
             PrepareConverter(_Converter);
             return _Processor.ExecuteReaderEnumerableAsync(context, ConstructQuery(), _Converter, cancellationToken);
         }

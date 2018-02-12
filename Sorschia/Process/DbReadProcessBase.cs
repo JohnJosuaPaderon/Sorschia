@@ -14,27 +14,27 @@ namespace Sorschia.Process
             _Converter = converter;
         }
 
-        protected readonly TConverter _Converter;
+        private readonly TConverter _Converter;
 
-        protected abstract void PrepareConverter(TConverter converter);
+        protected virtual void PrepareConverter(TConverter converter)
+        {
+            converter.Reset();
+        }
 
         public T Execute(IProcessContext context)
         {
-            _Converter.Reset();
             PrepareConverter(_Converter);
             return _Processor.ExecuteReader(context, ConstructQuery(), _Converter);
         }
 
         public Task<T> ExecuteAsync(IProcessContext context)
         {
-            _Converter.Reset();
             PrepareConverter(_Converter);
             return _Processor.ExecuteReaderAsync(context, ConstructQuery(), _Converter);
         }
 
         public Task<T> ExecuteAsync(IProcessContext context, CancellationToken cancellationToken)
         {
-            _Converter.Reset();
             PrepareConverter(_Converter);
             return _Processor.ExecuteReaderAsync(context, ConstructQuery(), _Converter, cancellationToken);
         }
