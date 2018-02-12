@@ -5,7 +5,17 @@ VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sorschia", "Sorschia\Sorschia.csproj", "{1117C22F-9F0B-45D6-85A2-66E75C19AA6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorschia.SqlServer", "Sorschia.SqlServer\Sorschia.SqlServer.csproj", "{33150880-5B43-4702-BCE3-607D5FAADB82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sorschia.SqlServer", "Sorschia.SqlServer\Sorschia.SqlServer.csproj", "{33150880-5B43-4702-BCE3-607D5FAADB82}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{928DA716-4C4A-45DC-9445-B8BB2A1FB345}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EmployeeManagement", "EmployeeManagement", "{847C92C9-B20B-4625-BB88-2E2D661B25D7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.EmployeeManagement", "Sample.EmployeeManagement\Sample.EmployeeManagement.csproj", "{6C6A9B41-339C-438C-9B3E-8C7D277C8055}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.EmployeeManagement.SqlServer", "Sample.EmployeeManagement.SqlServer\Sample.EmployeeManagement.SqlServer.csproj", "{6DB185CB-699A-48D7-B008-C3360DAB5191}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.EmployeeManagement.Client.Web", "Sample.EmployeeManagement.Client.Web\Sample.EmployeeManagement.Client.Web.csproj", "{D825834F-6AE2-426C-9217-231DC0910AC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +31,27 @@ Global
 		{33150880-5B43-4702-BCE3-607D5FAADB82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33150880-5B43-4702-BCE3-607D5FAADB82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33150880-5B43-4702-BCE3-607D5FAADB82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C6A9B41-339C-438C-9B3E-8C7D277C8055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C6A9B41-339C-438C-9B3E-8C7D277C8055}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C6A9B41-339C-438C-9B3E-8C7D277C8055}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C6A9B41-339C-438C-9B3E-8C7D277C8055}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DB185CB-699A-48D7-B008-C3360DAB5191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DB185CB-699A-48D7-B008-C3360DAB5191}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DB185CB-699A-48D7-B008-C3360DAB5191}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DB185CB-699A-48D7-B008-C3360DAB5191}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D825834F-6AE2-426C-9217-231DC0910AC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D825834F-6AE2-426C-9217-231DC0910AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D825834F-6AE2-426C-9217-231DC0910AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D825834F-6AE2-426C-9217-231DC0910AC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{847C92C9-B20B-4625-BB88-2E2D661B25D7} = {928DA716-4C4A-45DC-9445-B8BB2A1FB345}
+		{6C6A9B41-339C-438C-9B3E-8C7D277C8055} = {847C92C9-B20B-4625-BB88-2E2D661B25D7}
+		{6DB185CB-699A-48D7-B008-C3360DAB5191} = {847C92C9-B20B-4625-BB88-2E2D661B25D7}
+		{D825834F-6AE2-426C-9217-231DC0910AC5} = {847C92C9-B20B-4625-BB88-2E2D661B25D7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9FF65FAA-F74A-4920-9EA4-8F6151302598}

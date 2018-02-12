@@ -1,12 +1,14 @@
-﻿namespace EmployeeManagement.Client.Web.Models.Department
+﻿using System.Collections.Generic;
+
+namespace EmployeeManagement.Client.Web.Models.Department
 {
     public class IndexModel
     {
-        public IndexModel(Entity.Department department = null)
+        public IndexModel(IEnumerable<Entity.Department> departments = null)
         {
-            Department = department ?? new Entity.Department();
+            Departments = departments;
         }
 
-        public Entity.Department Department { get; set; }
+        public IEnumerable<Entity.Department> Departments { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using EmployeeManagement.Manager;
+using EmployeeManagement.Process;
 using Microsoft.Extensions.DependencyInjection;
 using Sorschia;
 
@@ -10,7 +11,10 @@ namespace EmployeeManagement
         {
             return instance
                 .UseSqlServerBase()
-                .AddSingleton<IDepartmentManager, DepartmentManager>();
+                .AddSingleton<IDepartmentManager, DepartmentManager>()
+                .AddTransient<IInsertDepartment, InsertDepartment>()
+                .AddTransient<IGetDepartment, GetDepartment>()
+                .AddTransient<IGetDepartmentList, GetDepartmentList>();
         }
     }
 }

@@ -9,7 +9,8 @@ namespace EmployeeManagement.Convention
         {
             return instance
                 .UseConventionBase()
-                .AddSingleton<IDepartmentParameterName, DepartmentParameterName>();
+                .AddSingleton<IDepartmentParameterName, DepartmentParameterName>()
+                .AddSingleton<IDepartmentFieldName, DepartmentFieldName>();
         }
     }
 }

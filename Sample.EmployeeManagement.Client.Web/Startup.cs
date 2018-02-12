@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using EmployeeManagement.Convention;
+using EmployeeManagement.Converter;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +23,9 @@ namespace EmployeeManagement.Client.Web
             services.AddMvc();
             services
                 .UseProcessContextManager()
-                .UseSqlServer();
+                .UseSqlServer()
+                .AddConventions()
+                .AddConverters();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +48,10 @@ namespace EmployeeManagement.Client.Web
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "default_get",
+                    template: "{controller=Home}/{action=Index}/id");
             });
         }
     }
