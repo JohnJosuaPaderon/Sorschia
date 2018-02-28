@@ -12,6 +12,7 @@
     <Copyright>Copyright (c) 2018 John Josua R. Paderon</Copyright>
     <PackageReleaseNotes>Total revision of Sorschia</PackageReleaseNotes>
     <PackageTags>Sorschia</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/JohnJosuaPaderon/Sorschia/master/sorschia_logo.png</PackageIconUrl>
   </PropertyGroup>
 
   <ItemGroup>
