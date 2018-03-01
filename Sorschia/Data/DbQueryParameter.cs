@@ -9,6 +9,11 @@ namespace Sorschia.Data
             return new DbQueryParameter(name, value, DbQueryParameterDirection.Input, DbQueryParameterType.NotSet);
         }
 
+        public static DbQueryParameter Input(string name, object value, DbQueryParameterType type)
+        {
+            return new DbQueryParameter(name, value, DbQueryParameterDirection.Input, type);
+        }
+
         public static DbQueryParameter Output(string name, DbQueryParameterType type)
         {
             return new DbQueryParameter(name, null, DbQueryParameterDirection.Output, type);

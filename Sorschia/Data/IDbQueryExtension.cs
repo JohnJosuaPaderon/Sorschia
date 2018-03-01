@@ -8,6 +8,11 @@
             return instance;
         }
 
+        public static IDbQuery AddInParameter(this IDbQuery instance, string name, object value, DbQueryParameterType type)
+        {
+            instance.Parameters.Add(DbQueryParameter.Input(name, value, type));
+        }
+
         public static IDbQuery AddOutParameter(this IDbQuery instance, string name, DbQueryParameterType type)
         {
             instance.Parameters.Add(DbQueryParameter.Output(name, type));
