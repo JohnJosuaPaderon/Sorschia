@@ -60,7 +60,6 @@ namespace Sorschia.Data
             if (_Source.ContainsKey(context))
             {
                 var secureConnectionString = _Source[context];
-                secureConnectionString.Dispose();
                 _Source.Remove(context);
             }
         }

@@ -11,6 +11,7 @@
         public static IDbQuery AddInParameter(this IDbQuery instance, string name, object value, DbQueryParameterType type)
         {
             instance.Parameters.Add(DbQueryParameter.Input(name, value, type));
+            return instance;
         }
 
         public static IDbQuery AddOutParameter(this IDbQuery instance, string name, DbQueryParameterType type)
