@@ -16,7 +16,6 @@ namespace Sorschia.Process
         }
 
         public static T Get<T>()
-            where T : IProcessCore
         {
             return ServiceProvider.GetService<T>();
         }
