@@ -8,7 +8,7 @@ namespace EmployeeManagement.Convention
         public static IServiceCollection AddConventions(this IServiceCollection instance)
         {
             return instance
-                .UseConventionBase()
+                .AddConventionBase()
                 .AddSingleton<IDepartmentParameterName, DepartmentParameterName>()
                 .AddSingleton<IDepartmentFieldName, DepartmentFieldName>();
         }

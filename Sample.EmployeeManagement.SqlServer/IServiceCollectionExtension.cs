@@ -10,7 +10,7 @@ namespace EmployeeManagement
         public static IServiceCollection UseSqlServer(this IServiceCollection instance)
         {
             return instance
-                .UseSqlServerBase()
+                .AddSqlServerBase()
                 .AddSingleton<IDepartmentManager, DepartmentManager>()
                 .AddTransient<IInsertDepartment, InsertDepartment>()
                 .AddTransient<IGetDepartment, GetDepartment>()

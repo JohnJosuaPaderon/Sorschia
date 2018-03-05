@@ -6,10 +6,10 @@ namespace Sorschia
 {
     public static class IServiceCollectionExtension
     {
-        public static IServiceCollection UseSqlServerBase(this IServiceCollection instance)
+        public static IServiceCollection AddSqlServerBase(this IServiceCollection instance)
         {
             return instance
-                .UseConnectionStringPool()
+                .AddConnectionStringPool()
                 .AddSingleton<IDbConnectionProvider<SqlConnection>, SqlConnectionProvider>()
                 .AddSingleton<IDbTransactionProvider<SqlTransaction>, SqlTransactionProvider>()
                 .AddSingleton<IDbCommandCreator<SqlCommand>, SqlCommandCreator>()

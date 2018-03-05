@@ -22,7 +22,7 @@ namespace EmployeeManagement.Client.Web
         {
             services.AddMvc();
             services
-                .UseProcessContextManager()
+                .AddProcessContextManager()
                 .UseSqlServer()
                 .AddConventions()
                 .AddConverters();
