@@ -3,7 +3,8 @@
 namespace Sorschia
 {
     partial class Validator
-    {public static void LessThanOrEqual(byte value, byte minValue, string message)
+    {
+        public static void LessThanOrEqualByte(byte value, byte minValue, string message)
         {
             if (value <= minValue)
             {
@@ -11,7 +12,7 @@ namespace Sorschia
             }
         }
 
-        public static void LessThanOrEqual(DateTime value, DateTime minValue, string message)
+        public static void LessThanOrEqualDateTime(DateTime value, DateTime minValue, string message)
         {
             if (value <= minValue)
             {
@@ -19,7 +20,7 @@ namespace Sorschia
             }
         }
 
-        public static void LessThanOrEqual(decimal value, byte minValue, string message)
+        public static void LessThanOrEqualDecimal(decimal value, byte minValue, string message)
         {
             if (value <= minValue)
             {
@@ -27,7 +28,7 @@ namespace Sorschia
             }
         }
 
-        public static void LessThanOrEqual(double value, double minValue, string message)
+        public static void LessThanOrEqualDouble(double value, double minValue, string message)
         {
             if (value <= minValue)
             {
@@ -35,7 +36,7 @@ namespace Sorschia
             }
         }
 
-        public static void LessThanOrEqual(short value, short minValue, string message)
+        public static void LessThanOrEqualInt16(short value, short minValue, string message)
         {
             if (value <= minValue)
             {
@@ -43,7 +44,7 @@ namespace Sorschia
             }
         }
 
-        public static void LessThanOrEqual(int value, int minValue, string message)
+        public static void LessThanOrEqualInt32(int value, int minValue, string message)
         {
             if (value <= minValue)
             {
@@ -51,7 +52,7 @@ namespace Sorschia
             }
         }
 
-        public static void LessThanOrEqual(long value, long minValue, string message)
+        public static void LessThanOrEqualInt64(long value, long minValue, string message)
         {
             if (value <= minValue)
             {
@@ -59,7 +60,7 @@ namespace Sorschia
             }
         }
 
-        public static void LessThanOrEqual(sbyte value, sbyte minValue, string message)
+        public static void LessThanOrEqualSByte(sbyte value, sbyte minValue, string message)
         {
             if (value <= minValue)
             {
@@ -67,7 +68,7 @@ namespace Sorschia
             }
         }
 
-        public static void LessThanOrEqual(float value, float minValue, string message)
+        public static void LessThanOrEqualSingle(float value, float minValue, string message)
         {
             if (value <= minValue)
             {
@@ -75,7 +76,7 @@ namespace Sorschia
             }
         }
 
-        public static void LessThanOrEqual(TimeSpan value, TimeSpan minValue, string message)
+        public static void LessThanOrEqualTimeSpan(TimeSpan value, TimeSpan minValue, string message)
         {
             if (value <= minValue)
             {
@@ -83,7 +84,7 @@ namespace Sorschia
             }
         }
 
-        public static void LessThanOrEqual(ushort value, ushort minValue, string message)
+        public static void LessThanOrEqualUInt16(ushort value, ushort minValue, string message)
         {
             if (value <= minValue)
             {
@@ -91,7 +92,7 @@ namespace Sorschia
             }
         }
 
-        public static void LessThanOrEqual(uint value, uint minValue, string message)
+        public static void LessThanOrEqualUInt32(uint value, uint minValue, string message)
         {
             if (value <= minValue)
             {
@@ -99,7 +100,7 @@ namespace Sorschia
             }
         }
 
-        public static void LessThanOrEqual(ulong value, ulong minValue, string message)
+        public static void LessThanOrEqualUInt64(ulong value, ulong minValue, string message)
         {
             if (value <= minValue)
             {
@@ -107,82 +108,82 @@ namespace Sorschia
             }
         }
 
-        public static void LessThanOrEqual(byte? value, byte minValue, string message)
+        public static void LessThanOrEqualSByte(byte? value, byte minValue, string message)
         {
             Null(value, message);
-            LessThanOrEqual(value.Value, minValue, message);
+            LessThanOrEqualSByte(value.Value, minValue, message);
         }
 
-        public static void LessThanOrEqual(DateTime? value, DateTime minValue, string message)
+        public static void LessThanOrEqualDateTime(DateTime? value, DateTime minValue, string message)
         {
             Null(value, message);
-            LessThanOrEqual(value.Value, minValue, message);
+            LessThanOrEqualDateTime(value.Value, minValue, message);
         }
 
-        public static void LessThanOrEqual(decimal? value, decimal minValue, string message)
+        public static void LessThanOrEqualDecimal(decimal? value, decimal minValue, string message)
         {
             Null(value, message);
-            LessThanOrEqual(value.Value, minValue, message);
+            LessThanOrEqualDecimal(value.Value, minValue, message);
         }
 
-        public static void LessThanOrEqual(double? value, double minValue, string message)
+        public static void LessThanOrEqualDouble(double? value, double minValue, string message)
         {
             Null(value, message);
-            LessThanOrEqual(value.Value, minValue, message);
+            LessThanOrEqualDouble(value.Value, minValue, message);
         }
 
-        public static void LessThanOrEqual(short? value, short minValue, string message)
+        public static void LessThanOrEqualInt16(short? value, short minValue, string message)
         {
             Null(value, message);
-            LessThanOrEqual(value.Value, minValue, message);
+            LessThanOrEqualInt16(value.Value, minValue, message);
         }
 
-        public static void LessThanOrEqual(int? value, int minValue, string message)
+        public static void LessThanOrEqualInt32(int? value, int minValue, string message)
         {
             Null(value, message);
-            LessThanOrEqual(value.Value, minValue, message);
+            LessThanOrEqualInt32(value.Value, minValue, message);
         }
 
-        public static void LessThanOrEqual(long? value, long minValue, string message)
+        public static void LessThanOrEqualInt64(long? value, long minValue, string message)
         {
             Null(value, message);
-            LessThanOrEqual(value.Value, minValue, message);
+            LessThanOrEqualInt64(value.Value, minValue, message);
         }
 
-        public static void LessThanOrEqual(sbyte? value, sbyte minValue, string message)
+        public static void LessThanOrEqualSByte(sbyte? value, sbyte minValue, string message)
         {
             Null(value, message);
-            LessThanOrEqual(value.Value, minValue, message);
+            LessThanOrEqualSByte(value.Value, minValue, message);
         }
 
-        public static void LessThanOrEqual(float? value, float minValue, string message)
+        public static void LessThanOrEqualSingle(float? value, float minValue, string message)
         {
             Null(value, message);
-            LessThanOrEqual(value.Value, minValue, message);
+            LessThanOrEqualSingle(value.Value, minValue, message);
         }
 
-        public static void LessThanOrEqual(TimeSpan? value, TimeSpan minValue, string message)
+        public static void LessThanOrEqualTimeSpan(TimeSpan? value, TimeSpan minValue, string message)
         {
             Null(value, message);
-            LessThanOrEqual(value.Value, minValue, message);
+            LessThanOrEqualTimeSpan(value.Value, minValue, message);
         }
 
-        public static void LessThanOrEqual(ushort? value, ushort minValue, string message)
+        public static void LessThanOrEqualUInt16(ushort? value, ushort minValue, string message)
         {
             Null(value, message);
-            LessThanOrEqual(value.Value, minValue, message);
+            LessThanOrEqualUInt16(value.Value, minValue, message);
         }
 
-        public static void LessThanOrEqual(uint? value, uint minValue, string message)
+        public static void LessThanOrEqualUInt32(uint? value, uint minValue, string message)
         {
             Null(value, message);
-            LessThanOrEqual(value.Value, minValue, message);
+            LessThanOrEqualUInt32(value.Value, minValue, message);
         }
 
-        public static void LessThanOrEqual(ulong? value, ulong minValue, string message)
+        public static void LessThanOrEqualUInt64(ulong? value, ulong minValue, string message)
         {
             Null(value, message);
-            LessThanOrEqual(value.Value, minValue, message);
+            LessThanOrEqualUInt64(value.Value, minValue, message);
         }
     }
 }
