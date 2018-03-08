@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Sorschia.Security;
+using System;
 using System.Data.Common;
 using System.IO;
+using System.Security;
 
 namespace Sorschia.Data
 {
@@ -441,6 +443,14 @@ namespace Sorschia.Data
         public static sbyte GetSByte(this DbDataReader instance, string fieldName, IFormatProvider formatProvider)
         {
             return instance.Get(fieldName, formatProvider, DbValueConverter.ToSByte);
+        }
+
+        /// <summary>
+        /// Gets the value of the specified field and converts to <see cref="SecureString"/>
+        /// </summary>
+        public static SecureString GetSecureString(this DbDataReader instance, string fieldName)
+        {
+            return SecureStringConverter.Convert(instance.GetString(fieldName));
         }
 
         /// <summary>

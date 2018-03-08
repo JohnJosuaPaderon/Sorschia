@@ -7,7 +7,7 @@ namespace Sorschia.Entity
     /// Error occured on validation on <see cref="EntityCollection{T, TId}"/>
     /// </summary>
     [Serializable]
-    public class EntityCollectionValidationException : ValidationException
+    public class EntityCollectionValidationException : Exception
     {
         /// <summary>
         /// Default constructor

@@ -25,5 +25,11 @@
             instance.Parameters.Add(DbQueryParameter.InputOutput(name, value, type));
             return instance;
         }
+
+        public static IDbQuery AddLogByParameter(this IDbQuery instance, string logBy)
+        {
+            instance.AddInParameter("@_LogBy", logBy);
+            return instance;
+        }
     }
 }

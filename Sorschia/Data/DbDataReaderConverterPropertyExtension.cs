@@ -25,5 +25,20 @@ namespace Sorschia.Data
         {
             return instance.UseProvidedValue ? instance.Value : await getPropertyAsync(getIdentifier(identifierField), cancellationToken);
         }
+
+        public static TResult TryGetValueFromProcess<TResult, TIdentifier>(this DbDataReaderConverterProperty<TResult> instance, Func<TIdentifier, bool, TResult> getProperty, Func<string, TIdentifier> getIdentifier, string identifierField, bool memoryFirst)
+        {
+            return instance.UseProvidedValue ? instance.Value : getProperty(getIdentifier(identifierField), memoryFirst);
+        }
+
+        public static async Task<TResult> TryGetValueFromProcessAsync<TResult, TIdentifier>(this DbDataReaderConverterProperty<TResult> instance, Func<TIdentifier, bool, Task<TResult>> getPropertyAsync, Func<string, TIdentifier> getIdentifier, string identifierField, bool memoryFirst)
+        {
+            return instance.UseProvidedValue ? instance.Value : await getPropertyAsync(getIdentifier(identifierField), memoryFirst);
+        }
+
+        public static async Task<TResult> TryGetValueFromProcessAsync<TResult, TIdentifier>(this DbDataReaderConverterProperty<TResult> instance, Func<TIdentifier, bool, CancellationToken, Task<TResult>> getPropertyAsync, Func<string, TIdentifier> getIdentifier, string identifierField, bool memoryFirst, CancellationToken cancellationToken)
+        {
+            return instance.UseProvidedValue ? instance.Value : await getPropertyAsync(getIdentifier(identifierField), memoryFirst, cancellationToken);
+        }
     }
 }

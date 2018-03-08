@@ -3,38 +3,29 @@ using System.Runtime.Serialization;
 
 namespace Sorschia
 {
-    /// <summary>
-    /// Error occured on validation
-    /// </summary>
     [Serializable]
     public class ValidationException : Exception
     {
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public ValidationException()
+        public ValidationException(ValidationType validationType)
         {
+            ValidationType = validationType;
         }
 
-        /// <summary>
-        /// Initializes <see cref="ValidationException"/> with message
-        /// </summary>
-        public ValidationException(string message) : base(message)
+        public ValidationException(string message, ValidationType validationType) : base(message)
         {
+            ValidationType = validationType;
         }
 
-        /// <summary>
-        /// Initializes <see cref="ValidationException"/> with message and inner exception
-        /// </summary>
-        public ValidationException(string message, Exception innerException) : base(message, innerException)
+        public ValidationException(string message, ValidationType validationType, Exception innerException) : base(message, innerException)
         {
+            ValidationType = validationType;
         }
 
-        /// <summary>
-        /// Initializes <see cref="ValidationException"/> with serialization information and streaming context
-        /// </summary>
-        protected ValidationException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected ValidationException(ValidationType validationType, SerializationInfo info, StreamingContext context) : base(info, context)
         {
+            ValidationType = validationType;
         }
+
+        public ValidationType ValidationType { get; }
     }
 }
