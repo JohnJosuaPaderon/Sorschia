@@ -4,13 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.0.8</Version>
+    <Version>2.0.10</Version>
     <Authors>John Josua R. Paderon</Authors>
     <Description>Sorschia Library.</Description>
     <Copyright>Copyright (c) 2018 John Josua R. Paderon</Copyright>
     <Company>Sorschia</Company>
     <PackageTags>Sorschia</PackageTags>
-    <PackageReleaseNotes>Generic methods of LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual, InCollection and NotInCollection</PackageReleaseNotes>
+    <PackageReleaseNotes>1. Introduction of ConverterConfiguration class for default values required by DbDataReaderConverter.
+2. MemoryFirst property in DbDataReaderConverterBase&lt;T&gt;, and virtual method of Reset.</PackageReleaseNotes>
     <PackageIconUrl>https://raw.githubusercontent.com/JohnJosuaPaderon/Sorschia/master/sorschia_logo.png</PackageIconUrl>
   </PropertyGroup>
 

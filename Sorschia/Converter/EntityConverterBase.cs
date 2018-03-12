@@ -13,8 +13,9 @@ namespace Sorschia.Converter
 
         public DbDataReaderConverterProperty<TId> Id { get; }
 
-        public virtual void Reset()
+        public override void Reset()
         {
+            base.Reset();
             Id.Reset();
         }
     }

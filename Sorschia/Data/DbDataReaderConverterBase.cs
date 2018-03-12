@@ -7,7 +7,13 @@ namespace Sorschia.Data
 {
     public abstract class DbDataReaderConverterBase<T>
     {
+        public bool MemoryFirst { get; set; }
         protected abstract T Convert(DbDataReader reader);
+
+        public virtual void Reset()
+        {
+            MemoryFirst = ConverterConfiguration.DefaultMemoryFirst;
+        }
 
         protected virtual Task<T> ConvertAsync(DbDataReader reader)
         {
