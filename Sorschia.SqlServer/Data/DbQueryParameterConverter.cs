@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data.SqlClient;
 
 namespace Sorschia.Data
 {
@@ -9,7 +10,7 @@ namespace Sorschia.Data
             var result = new SqlParameter()
             {
                 ParameterName = parameter.Name,
-                Value = parameter.Value,
+                Value = parameter.Value ?? DBNull.Value,
                 Direction = DbQueryParameterDirectionConverter.ToNative(parameter.Direction)
             };
 

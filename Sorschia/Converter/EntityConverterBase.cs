@@ -19,4 +19,15 @@ namespace Sorschia.Converter
             Id.Reset();
         }
     }
+
+    public abstract class EntityConverterBase<T, TId, TFields> : EntityConverterBase<T, TId>
+        where T : IEntity<TId>
+    {
+        public EntityConverterBase(TFields fields)
+        {
+            Fields = fields;
+        }
+
+        protected TFields Fields { get; }
+    }
 }
