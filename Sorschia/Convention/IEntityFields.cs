@@ -1,6 +1,6 @@
 ﻿namespace Sorschia.Convention
 {
-    public interface IEntityParameterName : IModelParameterName
+    public interface IEntityFields : IModelFields
     {
         string Id { get; }
     }

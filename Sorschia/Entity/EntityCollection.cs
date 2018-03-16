@@ -139,5 +139,20 @@ namespace Sorschia.Entity
         {
             return GetEnumerator();
         }
+
+        public void AddOrUpdate(T entity)
+        {
+            _Validator.ValidateEntity(entity);
+            _Validator.ValidateId(entity.Id);
+
+            if (_Source.ContainsKey(entity.Id))
+            {
+                _Source[entity.Id] = entity;
+            }
+            else
+            {
+                _Source.Add(entity.Id, entity);
+            }
+        }
     }
 }

@@ -11,51 +11,28 @@ namespace Sorschia.Manager
     {
         public DbEntityManagerBase(IProcessContextManager contextManager, IConnectionStringPool connectionStringPool) : base(contextManager, connectionStringPool)
         {
-            _Source = new EntityCollection<T, TId>();
+            Source = new EntityCollection<T, TId>();
         }
 
-        protected readonly IEntityCollection<T, TId> _Source;
+        protected IEntityCollection<T, TId> Source { get; }
 
-        protected T TryAdd(T entity)
+        protected T TryAddOrUpdate(T entity)
         {
             if (!Equals(entity, default(T)))
             {
-                _Source.Add(entity);
+                Source.AddOrUpdate(entity);
             }
 
             return entity;
         }
 
-        protected IEnumerable<T> TryAdd(IEnumerable<T> entities)
+        protected IEnumerable<T> TryAddOrUpdate(IEnumerable<T> entities)
         {
             if (entities != null && entities.Any())
             {
                 foreach (var entity in entities)
                 {
-                    TryAdd(entity);
-                }
-            }
-
-            return entities;
-        }
-
-        protected T TryUpdate(T entity)
-        {
-            if (!Equals(entity, default(T)))
-            {
-                _Source[entity.Id] = entity;
-            }
-
-            return entity;
-        }
-
-        protected IEnumerable<T> TryUpdate(IEnumerable<T> entities)
-        {
-            if (entities != null && entities.Any())
-            {
-                foreach (var entity in entities)
-                {
-                    TryUpdate(entity);
+                    TryAddOrUpdate(entity);
                 }
             }
 
@@ -66,7 +43,7 @@ namespace Sorschia.Manager
         {
             if (!Equals(entity, default(T)))
             {
-                _Source.Remove(entity);
+                Source.Remove(entity);
             }
 
             return entity;

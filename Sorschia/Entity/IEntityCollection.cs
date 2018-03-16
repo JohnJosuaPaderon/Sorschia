@@ -47,5 +47,6 @@ namespace Sorschia.Entity
         /// Determines whether the entity with the specified identifier exists in the collection
         /// </summary>
         bool Contains(TId id);
+        void AddOrUpdate(T entity);
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace Sorschia.Convention
 {
-    public class ModelParameterName
+    public class ModelFields
     {
-        public ModelParameterName(IParameterNameFormatter formatter)
+        public ModelFields(IFieldNameFormatter formatter)
         {
             CreatedBy = formatter.Format(nameof(CreatedBy));
             DateCreated = formatter.Format(nameof(DateCreated));

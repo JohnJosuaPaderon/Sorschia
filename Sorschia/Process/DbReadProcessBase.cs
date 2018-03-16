@@ -11,32 +11,44 @@ namespace Sorschia.Process
     {
         public DbReadProcessBase(IProcessContextManager contextManager, IDbProcessor<TCommand> processor, TConverter converter, string schema = null) : base(contextManager, processor, schema)
         {
-            _Converter = converter;
+            Converter = converter;
         }
 
-        private readonly TConverter _Converter;
+        private TConverter Converter { get; }
 
-        protected virtual void PrepareConverter(TConverter converter)
+        protected virtual void ConfigureConverter(TConverter converter)
         {
             converter.Reset();
         }
 
         public T Execute(IProcessContext context)
         {
-            PrepareConverter(_Converter);
-            return _Processor.ExecuteReader(context, ConstructQuery(), _Converter);
+            ConfigureConverter(Converter);
+            return Processor.ExecuteReader(context, ConstructQuery(), Converter);
         }
 
         public Task<T> ExecuteAsync(IProcessContext context)
         {
-            PrepareConverter(_Converter);
-            return _Processor.ExecuteReaderAsync(context, ConstructQuery(), _Converter);
+            ConfigureConverter(Converter);
+            return Processor.ExecuteReaderAsync(context, ConstructQuery(), Converter);
         }
 
         public Task<T> ExecuteAsync(IProcessContext context, CancellationToken cancellationToken)
         {
-            PrepareConverter(_Converter);
-            return _Processor.ExecuteReaderAsync(context, ConstructQuery(), _Converter, cancellationToken);
+            ConfigureConverter(Converter);
+            return Processor.ExecuteReaderAsync(context, ConstructQuery(), Converter, cancellationToken);
         }
+    }
+
+    public abstract class DbReadProcessBase<T, TCommand, TConverter, TParameters> : DbReadProcessBase<T, TCommand, TConverter>
+        where TCommand : DbCommand
+        where TConverter : IDbDataReaderConverter<T>
+    {
+        public DbReadProcessBase(IProcessContextManager contextManager, IDbProcessor<TCommand> processor, TConverter converter, TParameters parameters, string schema = null) : base(contextManager, processor, converter, schema)
+        {
+            Parameters = parameters;
+        }
+
+        protected TParameters Parameters { get; }
     }
 }

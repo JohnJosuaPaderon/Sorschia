@@ -4,10 +4,10 @@
     {
         public ProcessCoreBase(IProcessContextManager contextManager)
         {
-            _ContextManager = contextManager;
+            ContextManager = contextManager;
         }
 
-        protected readonly IProcessContextManager _ContextManager;
+        protected IProcessContextManager ContextManager { get; }
 
         public virtual void Dispose()
         {

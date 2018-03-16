@@ -1,6 +1,6 @@
 ﻿namespace Sorschia.Convention
 {
-    public interface IModelParameterName
+    public interface IModelFields
     {
         string CreatedBy { get; }
         string DateCreated { get; }

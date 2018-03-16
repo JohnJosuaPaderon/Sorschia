@@ -12,32 +12,44 @@ namespace Sorschia.Process
     {
         public DbReadEnumerableProcessBase(IProcessContextManager contextManager, IDbProcessor<TCommand> processor, TConverter converter, string schema = null) : base(contextManager, processor, schema)
         {
-            _Converter = converter;
+            Converter = converter;
         }
 
-        protected readonly TConverter _Converter;
+        protected TConverter Converter { get; }
 
-        protected virtual void PrepareConverter(TConverter converter)
+        protected virtual void ConfigureConverter(TConverter converter)
         {
-            _Converter.Reset();
+            Converter.Reset();
         }
 
         public IEnumerable<T> Execute(IProcessContext context)
         {
-            PrepareConverter(_Converter);
-            return _Processor.ExecuteReaderEnumerable(context, ConstructQuery(), _Converter);
+            ConfigureConverter(Converter);
+            return Processor.ExecuteReaderEnumerable(context, ConstructQuery(), Converter);
         }
 
         public Task<IEnumerable<T>> ExecuteAsync(IProcessContext context)
         {
-            PrepareConverter(_Converter);
-            return _Processor.ExecuteReaderEnumerableAsync(context, ConstructQuery(), _Converter);
+            ConfigureConverter(Converter);
+            return Processor.ExecuteReaderEnumerableAsync(context, ConstructQuery(), Converter);
         }
 
         public Task<IEnumerable<T>> ExecuteAsync(IProcessContext context, CancellationToken cancellationToken)
         {
-            PrepareConverter(_Converter);
-            return _Processor.ExecuteReaderEnumerableAsync(context, ConstructQuery(), _Converter, cancellationToken);
+            ConfigureConverter(Converter);
+            return Processor.ExecuteReaderEnumerableAsync(context, ConstructQuery(), Converter, cancellationToken);
         }
+    }
+
+    public abstract class DbReadEnumerableProcessBase<T, TCommand, TConverter, TParameters> : DbReadEnumerableProcessBase<T, TCommand, TConverter>
+        where TCommand : DbCommand
+        where TConverter : IDbDataReaderConverter<T>
+    {
+        public DbReadEnumerableProcessBase(IProcessContextManager contextManager, IDbProcessor<TCommand> processor, TConverter converter, TParameters parameters, string schema = null) : base(contextManager, processor, converter, schema)
+        {
+            Parameters = parameters;
+        }
+
+        protected TParameters Parameters { get; }
     }
 }

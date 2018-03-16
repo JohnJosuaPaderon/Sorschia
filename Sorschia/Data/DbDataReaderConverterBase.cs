@@ -79,4 +79,14 @@ namespace Sorschia.Data
             return result;
         }
     }
+
+    public abstract class DbDataReaderConverterBase<T, TFields> : DbDataReaderConverterBase<T>
+    {
+        public DbDataReaderConverterBase(TFields fields)
+        {
+            Fields = fields;
+        }
+
+        protected TFields Fields { get; }
+    }
 }

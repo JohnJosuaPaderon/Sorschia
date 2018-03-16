@@ -16,17 +16,28 @@ namespace Sorschia.Process
 
         public T Execute(IProcessContext context)
         {
-            return _Processor.ExecuteNonQuery(context, ConstructQuery(), Callback);
+            return Processor.ExecuteNonQuery(context, ConstructQuery(), Callback);
         }
 
         public Task<T> ExecuteAsync(IProcessContext context)
         {
-            return _Processor.ExecuteNonQueryAsync(context, ConstructQuery(), Callback);
+            return Processor.ExecuteNonQueryAsync(context, ConstructQuery(), Callback);
         }
 
         public Task<T> ExecuteAsync(IProcessContext context, CancellationToken cancellationToken)
         {
-            return _Processor.ExecuteNonQueryAsync(context, ConstructQuery(), Callback, cancellationToken);
+            return Processor.ExecuteNonQueryAsync(context, ConstructQuery(), Callback, cancellationToken);
         }
+    }
+
+    public abstract class DbExecuteProcessBase<T, TCommand, TParameters> : DbExecuteProcessBase<T, TCommand>
+        where TCommand : DbCommand
+    {
+        public DbExecuteProcessBase(IProcessContextManager contextManager, IDbProcessor<TCommand> processor, TParameters parameters, string schema = null) : base(contextManager, processor, schema)
+        {
+            Parameters = parameters;
+        }
+
+        protected TParameters Parameters { get; }
     }
 }

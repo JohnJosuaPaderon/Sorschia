@@ -1,8 +1,8 @@
 ﻿namespace Sorschia.Convention
 {
-    public class EntityFieldName : ModelFieldName
+    public class EntityParameters : ModelParameters
     {
-        public EntityFieldName(IFieldNameFormatter formatter) : base(formatter)
+        public EntityParameters(IParameterNameFormatter formatter) : base(formatter)
         {
             Id = formatter.Format(nameof(Id));
         }

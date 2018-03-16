@@ -8,24 +8,29 @@ namespace Sorschia.Process
     {
         public DbProcessBase(IProcessContextManager contextManager, IDbProcessor<TCommand> processor, string schema = null) : base(contextManager)
         {
-            _Schema = schema;
-            _Processor = processor;
+            Schema = schema;
+            Processor = processor;
         }
 
-        protected readonly string _Schema;
-        protected readonly IDbProcessor<TCommand> _Processor;
+        protected string Schema { get; }
+        protected IDbProcessor<TCommand> Processor { get; }
 
         protected abstract IDbQuery ConstructQuery();
 
+        protected IDbQuery ProcedureQuery(string procedureName = null)
+        {
+            return DbQueryFactory.Procedure(procedureName ?? GetDbObjectName());
+        }
+
         protected string GetDbObjectName()
         {
-            if (string.IsNullOrWhiteSpace(_Schema))
+            if (string.IsNullOrWhiteSpace(Schema))
             {
                 return GetType().Name;
             }
             else
             {
-                return $"{_Schema}.{GetType().Name}";
+                return $"{Schema}.{GetType().Name}";
             }
         }
     }
