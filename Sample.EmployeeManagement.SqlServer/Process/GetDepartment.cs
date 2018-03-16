@@ -7,26 +7,23 @@ using System.Data.SqlClient;
 
 namespace EmployeeManagement.Process
 {
-    internal sealed class GetDepartment : DbReadProcessBase<Department, SqlCommand, IDepartmentConverter>, IGetDepartment
+    internal sealed class GetDepartment : DbReadProcessBase<Department, SqlCommand, IDepartmentConverter, IDepartmentParameters>, IGetDepartment
     {
-        public GetDepartment(IProcessContextManager contextManager, IDbProcessor<SqlCommand> processor, IDepartmentConverter converter, IDepartmentParameterName parameters) : base(contextManager, processor, converter)
+        public GetDepartment(IProcessContextManager contextManager, IDbProcessor<SqlCommand> processor, IDepartmentConverter converter, IDepartmentParameters parameters, string schema = null) : base(contextManager, processor, converter, parameters, schema)
         {
-            _Parameters = parameters;
         }
-
-        private readonly IDepartmentParameterName _Parameters;
 
         public int DepartmentId { get; set; }
 
         protected override IDbQuery ConstructQuery()
         {
-            return DbQueryFactory.Procedure(GetDbObjectName())
-                .AddInParameter(_Parameters.Id, DepartmentId);
+            return ProcedureQuery()
+                .AddInParameter(Parameters.Id, DepartmentId);
         }
 
-        protected override void PrepareConverter(IDepartmentConverter converter)
+        protected override void ConfigureConverter(IDepartmentConverter converter)
         {
-            base.PrepareConverter(converter);
+            base.ConfigureConverter(converter);
             converter.Id.Value = DepartmentId;
         }
     }

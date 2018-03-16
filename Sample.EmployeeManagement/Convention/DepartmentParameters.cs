@@ -2,9 +2,9 @@
 
 namespace EmployeeManagement.Convention
 {
-    internal sealed class DepartmentParameterName : EntityParameterName, IDepartmentParameterName
+    internal sealed class DepartmentParameters : EntityParameters, IDepartmentParameters
     {
-        public DepartmentParameterName(IParameterNameFormatter formatter) : base(formatter)
+        public DepartmentParameters(IParameterNameFormatter formatter) : base(formatter)
         {
             Name = formatter.Format(nameof(Name));
         }

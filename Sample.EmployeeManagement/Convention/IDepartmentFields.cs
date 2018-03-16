@@ -2,7 +2,7 @@
 
 namespace EmployeeManagement.Convention
 {
-    public interface IDepartmentFieldName : IEntityFieldName
+    public interface IDepartmentFields : IEntityFields
     {
         string Name { get; }
     }

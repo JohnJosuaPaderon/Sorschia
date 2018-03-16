@@ -23,9 +23,9 @@ namespace EmployeeManagement.Manager
         {
             if (departmentId > 0)
             {
-                if (_Source.Contains(departmentId))
+                if (Source.Contains(departmentId))
                 {
-                    return _Source[departmentId];
+                    return Source[departmentId];
                 }
                 else
                 {
@@ -34,7 +34,7 @@ namespace EmployeeManagement.Manager
                         process.DepartmentId = departmentId;
                         using (var context = InitializeContext(ConnectionString))
                         {
-                            return TryAdd(process.Execute(context));
+                            return TryAddOrUpdate(process.Execute(context));
                         }
                     }
                 }
@@ -49,9 +49,9 @@ namespace EmployeeManagement.Manager
         {
             if (departmentId > 0)
             {
-                if (_Source.Contains(departmentId))
+                if (Source.Contains(departmentId))
                 {
-                    return _Source[departmentId];
+                    return Source[departmentId];
                 }
                 else
                 {
@@ -60,7 +60,7 @@ namespace EmployeeManagement.Manager
                         process.DepartmentId = departmentId;
                         using (var context = InitializeContext(ConnectionString))
                         {
-                            return TryAdd(await process.ExecuteAsync(context));
+                            return TryAddOrUpdate(await process.ExecuteAsync(context));
                         }
                     }
                 }
@@ -75,9 +75,9 @@ namespace EmployeeManagement.Manager
         {
             if (departmentId > 0)
             {
-                if (_Source.Contains(departmentId))
+                if (Source.Contains(departmentId))
                 {
-                    return _Source[departmentId];
+                    return Source[departmentId];
                 }
                 else
                 {
@@ -86,7 +86,7 @@ namespace EmployeeManagement.Manager
                         process.DepartmentId = departmentId;
                         using (var context = InitializeContext(ConnectionString))
                         {
-                            return TryAdd(await process.ExecuteAsync(context, cancellationToken));
+                            return TryAddOrUpdate(await process.ExecuteAsync(context, cancellationToken));
                         }
                     }
                 }
@@ -103,7 +103,7 @@ namespace EmployeeManagement.Manager
             {
                 using (var context = InitializeContext(ConnectionString))
                 {
-                    return TryAdd(process.Execute(context));
+                    return TryAddOrUpdate(process.Execute(context));
                 }
             }
         }
@@ -114,7 +114,7 @@ namespace EmployeeManagement.Manager
             {
                 using (var context = InitializeContext(ConnectionString))
                 {
-                    return TryAdd(await process.ExecuteAsync(context));
+                    return TryAddOrUpdate(await process.ExecuteAsync(context));
                 }
             }
         }
@@ -125,7 +125,7 @@ namespace EmployeeManagement.Manager
             {
                 using (var context = InitializeContext(ConnectionString))
                 {
-                    return TryAdd(await process.ExecuteAsync(context));
+                    return TryAddOrUpdate(await process.ExecuteAsync(context));
                 }
             }
         }
@@ -139,7 +139,7 @@ namespace EmployeeManagement.Manager
                     process.Department = department;
                     using (var context = InitializeContext(ConnectionString))
                     {
-                        return TryAdd(process.Execute(context));
+                        return TryAddOrUpdate(process.Execute(context));
                     }
                 }
             }
@@ -158,7 +158,7 @@ namespace EmployeeManagement.Manager
                     process.Department = department;
                     using (var context = InitializeContext(ConnectionString))
                     {
-                        return TryAdd(await process.ExecuteAsync(context));
+                        return TryAddOrUpdate(await process.ExecuteAsync(context));
                     }
                 }
             }
@@ -177,7 +177,7 @@ namespace EmployeeManagement.Manager
                     process.Department = department;
                     using (var context = InitializeContext(ConnectionString))
                     {
-                        return TryAdd(await process.ExecuteAsync(context, cancellationToken));
+                        return TryAddOrUpdate(await process.ExecuteAsync(context, cancellationToken));
                     }
                 }
             }

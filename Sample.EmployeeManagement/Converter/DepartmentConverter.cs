@@ -8,13 +8,13 @@ namespace EmployeeManagement.Converter
 {
     internal sealed class DepartmentConverter : EntityConverterBase<Department, int>, IDepartmentConverter
     {
-        public DepartmentConverter(IDepartmentFieldName fields)
+        public DepartmentConverter(IDepartmentFields fields)
         {
             _Fields = fields;
             Name = new DbDataReaderConverterProperty<string>();
         }
 
-        private readonly IDepartmentFieldName _Fields;
+        private readonly IDepartmentFields _Fields;
 
         public DbDataReaderConverterProperty<string> Name { get; }
 

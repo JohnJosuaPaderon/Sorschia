@@ -14,7 +14,7 @@ namespace EmployeeManagement.Process
 
         protected override IDbQuery ConstructQuery()
         {
-            return DbQueryFactory.Procedure(GetDbObjectName());
+            return ProcedureQuery();
         }
     }
 }

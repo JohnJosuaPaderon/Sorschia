@@ -6,14 +6,11 @@ using System.Data.SqlClient;
 
 namespace EmployeeManagement.Process
 {
-    internal sealed class InsertDepartment : DbExecuteProcessBase<Department, SqlCommand>, IInsertDepartment
+    internal sealed class InsertDepartment : DbExecuteProcessBase<Department, SqlCommand, IDepartmentParameters>, IInsertDepartment
     {
-        public InsertDepartment(IProcessContextManager contextManager, IDbProcessor<SqlCommand> processor, IDepartmentParameterName parameters) : base(contextManager, processor)
+        public InsertDepartment(IProcessContextManager contextManager, IDbProcessor<SqlCommand> processor, IDepartmentParameters parameters, string schema = null) : base(contextManager, processor, parameters, schema)
         {
-            _Parameters = parameters;
         }
-
-        private readonly IDepartmentParameterName _Parameters;
 
         public Department Department { get; set; }
 
@@ -21,7 +18,7 @@ namespace EmployeeManagement.Process
         {
             if (affectedRows > 0)
             {
-                Department.Id = command.Parameters.GetInt32(_Parameters.Id);
+                Department.Id = command.Parameters.GetInt32(Parameters.Id);
                 return Department;
             }
             else
@@ -32,9 +29,9 @@ namespace EmployeeManagement.Process
 
         protected override IDbQuery ConstructQuery()
         {
-            return DbQueryFactory.Procedure(GetDbObjectName())
-                .AddOutParameter(_Parameters.Id, DbQueryParameterType.Int32)
-                .AddInParameter(_Parameters.Name, Department.Name);
+            return ProcedureQuery()
+                .AddOutParameter(Parameters.Id, DbQueryParameterType.Int32)
+                .AddInParameter(Parameters.Name, Department.Name);
         }
     }
 }

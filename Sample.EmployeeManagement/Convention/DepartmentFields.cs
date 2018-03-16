@@ -2,9 +2,9 @@
 
 namespace EmployeeManagement.Convention
 {
-    internal sealed class DepartmentFieldName : EntityFieldName, IDepartmentFieldName
+    internal sealed class DepartmentFields : EntityFields, IDepartmentFields
     {
-        public DepartmentFieldName(IFieldNameFormatter formatter) : base(formatter)
+        public DepartmentFields(IFieldNameFormatter formatter) : base(formatter)
         {
             Name = formatter.Format(nameof(Name));
         }
