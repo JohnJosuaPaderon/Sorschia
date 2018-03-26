@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Sorschia.Entity;
+using System.Collections.Generic;
 using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
@@ -88,5 +89,16 @@ namespace Sorschia.Data
         }
 
         protected TFields Fields { get; }
+    }
+
+    public abstract class DbDataReaderConverterBase<T, TId, TFields> : DbDataReaderConverterBase<T, TFields>
+       where T : IEntity<TId>
+    {
+        public DbDataReaderConverterBase(TFields fields) : base(fields)
+        {
+            Id = new DbDataReaderConverterProperty<TId>();
+        }
+
+        public DbDataReaderConverterProperty<TId> Id { get; }
     }
 }
