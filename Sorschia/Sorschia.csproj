@@ -4,17 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.1.2</Version>
+    <Version>2.1.3</Version>
     <Authors>John Josua R. Paderon</Authors>
     <Description>Sorschia Library.</Description>
     <Copyright>Copyright (c) 2018 John Josua R. Paderon</Copyright>
     <Company>Sorschia</Company>
     <PackageTags>Sorschia</PackageTags>
-    <PackageReleaseNotes>Sorschia.Data
-- New class: DbDataReaderConverterBase&lt;T, TId, TFields&gt;
-
-Sorschia.Entity
-- Entity providers.</PackageReleaseNotes>
+    <PackageReleaseNotes>ServiceStore: provides dependencies.
+Obsolete: Sorschia.Process.ProcessProvider</PackageReleaseNotes>
     <PackageIconUrl>https://raw.githubusercontent.com/JohnJosuaPaderon/Sorschia/master/sorschia_logo.png</PackageIconUrl>
   </PropertyGroup>
 

@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace Sorschia.Process
+namespace Sorschia
 {
-    [Obsolete("Use Sorschia.ServiceStore instead.")]
-    public static class ProcessProvider
+    public static class ServiceStore
     {
         private static IServiceProvider ServiceProvider;
 
