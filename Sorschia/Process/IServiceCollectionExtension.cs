@@ -6,7 +6,9 @@ namespace Sorschia.Process
     {
         public static IServiceCollection AddProcessContextManager(this IServiceCollection instance)
         {
-            return instance.AddSingleton<IProcessContextManager, ProcessContextManager>();
+            return instance
+                .AddSingleton<IProcessContextManager, ProcessContextManager>()
+                .AddSingleton<IProcessContextTransactionManager, ProcessContextTransactionManager>();
         }
     }
 }

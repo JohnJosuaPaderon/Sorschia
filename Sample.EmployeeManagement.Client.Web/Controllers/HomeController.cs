@@ -1,6 +1,6 @@
 ﻿using EmployeeManagement.Client.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using Sorschia.Process;
+using Sorschia;
 using System;
 using System.Diagnostics;
 
@@ -10,7 +10,7 @@ namespace EmployeeManagement.Client.Web.Controllers
     {
         public HomeController(IServiceProvider serviceProvider)
         {
-            ProcessProvider.Initialize(serviceProvider);
+            ServiceStore.Initialize(serviceProvider);
         }
 
         public IActionResult Index()

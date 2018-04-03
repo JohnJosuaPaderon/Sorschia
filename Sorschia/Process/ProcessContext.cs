@@ -19,13 +19,13 @@ namespace Sorschia.Process
 
         public ProcessContext(IProcessContextManager manager)
         {
-            _Manager = manager;
+            Manager = manager;
             Key = Guid.NewGuid();
             Status = ProcessContextStatus.NotSet;
             Finalizers = new List<Action<IProcessContext>>();
         }
 
-        private readonly IProcessContextManager _Manager;
+        private IProcessContextManager Manager { get; }
 
         public Guid Key { get; }
         public ProcessContextStatus Status { get; set; }
@@ -33,7 +33,7 @@ namespace Sorschia.Process
 
         public void Dispose()
         {
-            _Manager.Finalize(this);
+            Manager.Finalize(this);
         }
     }
 }

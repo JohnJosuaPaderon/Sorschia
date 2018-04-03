@@ -1,5 +1,6 @@
 ﻿using EmployeeManagement.Entity;
 using EmployeeManagement.Process;
+using Sorschia;
 using Sorschia.Data;
 using Sorschia.Manager;
 using Sorschia.Process;
@@ -13,7 +14,7 @@ namespace EmployeeManagement.Manager
 {
     internal sealed class DepartmentManager : DbEntityManagerBase<Department, int>, IDepartmentManager
     {
-        public DepartmentManager(IProcessContextManager contextManager, IConnectionStringPool connectionStringPool) : base(contextManager, connectionStringPool)
+        public DepartmentManager(IProcessContextManager contextManager, IConnectionStringPool connectionStringPool, IProcessContextTransactionManager contextTransactionManager) : base(contextManager, connectionStringPool, contextTransactionManager)
         {
         }
 
@@ -29,7 +30,7 @@ namespace EmployeeManagement.Manager
                 }
                 else
                 {
-                    using (var process = ProcessProvider.Get<IGetDepartment>())
+                    using (var process = ServiceStore.Get<IGetDepartment>())
                     {
                         process.DepartmentId = departmentId;
                         using (var context = InitializeContext(ConnectionString))
@@ -55,7 +56,7 @@ namespace EmployeeManagement.Manager
                 }
                 else
                 {
-                    using (var process = ProcessProvider.Get<IGetDepartment>())
+                    using (var process = ServiceStore.Get<IGetDepartment>())
                     {
                         process.DepartmentId = departmentId;
                         using (var context = InitializeContext(ConnectionString))
@@ -81,7 +82,7 @@ namespace EmployeeManagement.Manager
                 }
                 else
                 {
-                    using (var process = ProcessProvider.Get<IGetDepartment>())
+                    using (var process = ServiceStore.Get<IGetDepartment>())
                     {
                         process.DepartmentId = departmentId;
                         using (var context = InitializeContext(ConnectionString))
@@ -99,7 +100,7 @@ namespace EmployeeManagement.Manager
 
         public IEnumerable<Department> GetList()
         {
-            using (var process = ProcessProvider.Get<IGetDepartmentList>())
+            using (var process = ServiceStore.Get<IGetDepartmentList>())
             {
                 using (var context = InitializeContext(ConnectionString))
                 {
@@ -110,7 +111,7 @@ namespace EmployeeManagement.Manager
 
         public async Task<IEnumerable<Department>> GetListAsync()
         {
-            using (var process = ProcessProvider.Get<IGetDepartmentList>())
+            using (var process = ServiceStore.Get<IGetDepartmentList>())
             {
                 using (var context = InitializeContext(ConnectionString))
                 {
@@ -121,7 +122,7 @@ namespace EmployeeManagement.Manager
 
         public async Task<IEnumerable<Department>> GetListAsync(CancellationToken cancellationToken)
         {
-            using (var process = ProcessProvider.Get<IGetDepartmentList>())
+            using (var process = ServiceStore.Get<IGetDepartmentList>())
             {
                 using (var context = InitializeContext(ConnectionString))
                 {
@@ -134,10 +135,10 @@ namespace EmployeeManagement.Manager
         {
             if (department != null)
             {
-                using (var process = ProcessProvider.Get<IInsertDepartment>())
+                using (var process = ServiceStore.Get<IInsertDepartment>())
                 {
                     process.Department = department;
-                    using (var context = InitializeContext(ConnectionString))
+                    using (var context = InitializeContext(ConnectionString, true))
                     {
                         return TryAddOrUpdate(process.Execute(context));
                     }
@@ -153,10 +154,10 @@ namespace EmployeeManagement.Manager
         {
             if (department != null)
             {
-                using (var process = ProcessProvider.Get<IInsertDepartment>())
+                using (var process = ServiceStore.Get<IInsertDepartment>())
                 {
                     process.Department = department;
-                    using (var context = InitializeContext(ConnectionString))
+                    using (var context = InitializeContext(ConnectionString, true))
                     {
                         return TryAddOrUpdate(await process.ExecuteAsync(context));
                     }
@@ -172,10 +173,10 @@ namespace EmployeeManagement.Manager
         {
             if (department != null)
             {
-                using (var process = ProcessProvider.Get<IInsertDepartment>())
+                using (var process = ServiceStore.Get<IInsertDepartment>())
                 {
                     process.Department = department;
-                    using (var context = InitializeContext(ConnectionString))
+                    using (var context = InitializeContext(ConnectionString, true))
                     {
                         return TryAddOrUpdate(await process.ExecuteAsync(context, cancellationToken));
                     }

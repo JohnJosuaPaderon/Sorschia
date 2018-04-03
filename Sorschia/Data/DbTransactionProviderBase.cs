@@ -1,6 +1,8 @@
 ﻿using Sorschia.Process;
+using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Diagnostics;
 
 namespace Sorschia.Data
 {
@@ -14,14 +16,16 @@ namespace Sorschia.Data
         /// <summary>
         /// Initializes the <see cref="DbTransactionProviderBase{T}"/>
         /// </summary>
-        public DbTransactionProviderBase(IDbConnectionProvider<TConnection> connectionProvider)
+        public DbTransactionProviderBase(IDbConnectionProvider<TConnection> connectionProvider, IProcessContextTransactionManager contextTransactionManager)
         {
-            _ConnectionProvider = connectionProvider;
-            _Source = new Dictionary<IProcessContext, TTransaction>();
+            ConnectionProvider = connectionProvider;
+            ContextTransactionManager = contextTransactionManager;
+            Source = new Dictionary<IProcessContext, TTransaction>();
         }
 
-        private readonly Dictionary<IProcessContext, TTransaction> _Source;
-        private readonly IDbConnectionProvider<TConnection> _ConnectionProvider;
+        private Dictionary<IProcessContext, TTransaction> Source { get; }
+        private IDbConnectionProvider<TConnection> ConnectionProvider { get; }
+        private IProcessContextTransactionManager ContextTransactionManager { get; }
 
         /// <summary>
         /// Begins the transaction using the specified connection
@@ -33,21 +37,31 @@ namespace Sorschia.Data
         /// </summary>
         public void Finalize(IProcessContext context)
         {
-            if (_Source.ContainsKey(context))
+            if (Source.ContainsKey(context))
             {
-                var transaction = _Source[context];
+                var transaction = Source[context];
 
-                if (context.Status == ProcessContextStatus.Faulted)
+                try
                 {
-                    transaction.Rollback();
+                    if (context.Status == ProcessContextStatus.Faulted)
+                    {
+                        transaction.Rollback();
+                    }
+                    else
+                    {
+                        transaction.Commit();
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    transaction.Commit();
+                    Debug.WriteLine($"Cannot finalize transaction, {ex.Message}");
+                    throw;
                 }
-                
-                transaction.Dispose();
-                _Source.Remove(context);
+                finally
+                {
+                    transaction.Dispose();
+                    Source.Remove(context);
+                }
             }
         }
 
@@ -56,18 +70,25 @@ namespace Sorschia.Data
         /// </summary>
         public TTransaction Get(IProcessContext context)
         {
-            if (_Source.ContainsKey(context))
+            if (ContextTransactionManager.IsEnabled(context))
             {
-                return _Source[context];
+                if (Source.ContainsKey(context))
+                {
+                    return Source[context];
+                }
+                else
+                {
+                    var connection = ConnectionProvider.Get(context);
+                    var transaction = BeginTransaction(connection);
+                    Source.Add(context, transaction);
+                    ProcessContext.TryAddFinalizer(context, Finalize);
+                    ProcessContext.TryAddFinalizer(context, ConnectionProvider.Finalize);
+                    return transaction;
+                }
             }
             else
             {
-                var connection = _ConnectionProvider.Get(context);
-                var transaction = BeginTransaction(connection);
-                _Source.Add(context, transaction);
-                ProcessContext.TryAddFinalizer(context, Finalize);
-                ProcessContext.TryAddFinalizer(context, _ConnectionProvider.Finalize);
-                return transaction;
+                return null;
             }
         }
     }

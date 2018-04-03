@@ -1,10 +1,11 @@
-﻿using System.Data.SqlClient;
+﻿using Sorschia.Process;
+using System.Data.SqlClient;
 
 namespace Sorschia.Data
 {
     internal sealed class SqlTransactionProvider : DbTransactionProviderBase<SqlConnection, SqlTransaction>, IDbTransactionProvider<SqlTransaction>
     {
-        public SqlTransactionProvider(IDbConnectionProvider<SqlConnection> connectionProvider) : base(connectionProvider)
+        public SqlTransactionProvider(IDbConnectionProvider<SqlConnection> connectionProvider, IProcessContextTransactionManager contextTransactionManager) : base(connectionProvider, contextTransactionManager)
         {
         }
 

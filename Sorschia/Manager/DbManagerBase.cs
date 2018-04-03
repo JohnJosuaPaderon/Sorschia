@@ -8,26 +8,38 @@ namespace Sorschia.Manager
 {
     public abstract class DbManagerBase
     {
-        public DbManagerBase(IProcessContextManager contextManager, IConnectionStringPool connectionStringPool)
+        public DbManagerBase(IProcessContextManager contextManager, IConnectionStringPool connectionStringPool, IProcessContextTransactionManager contextTransactionManager)
         {
-            _ContextManager = contextManager;
-            _ConnectionStringPool = connectionStringPool;
+            ContextManager = contextManager;
+            ConnectionStringPool = connectionStringPool;
+            ContextTransactionManager = contextTransactionManager;
         }
 
-        private readonly IConnectionStringPool _ConnectionStringPool;
-        private readonly IProcessContextManager _ContextManager;
+        private IConnectionStringPool ConnectionStringPool { get; }
+        private IProcessContextManager ContextManager { get; }
+        private IProcessContextTransactionManager ContextTransactionManager { get; }
 
-        protected IProcessContext InitializeContext(SecureString secureConnectionString)
+        protected IProcessContext InitializeContext(SecureString secureConnectionString, bool enableTransaction = false)
         {
-            var context = _ContextManager.Initialize();
-            _ConnectionStringPool.Add(context, secureConnectionString);
+            var context = ContextManager.Initialize();
+
+            if (enableTransaction)
+            {
+                ContextTransactionManager.Enable(context);
+            }
+            else
+            {
+                ContextTransactionManager.Disable(context);
+            }
+
+            ConnectionStringPool.Add(context, secureConnectionString);
             return context;
         }
     }
 
     public abstract class DbManagerBase<T> : DbManagerBase
     {
-        public DbManagerBase(IProcessContextManager contextManager, IConnectionStringPool connectionStringPool) : base(contextManager, connectionStringPool)
+        public DbManagerBase(IProcessContextManager contextManager, IConnectionStringPool connectionStringPool, IProcessContextTransactionManager contextTransactionManager) : base(contextManager, connectionStringPool, contextTransactionManager)
         {
             Source = new List<T>();
         }

@@ -4,9 +4,9 @@
     {
         public EntityManagerBase()
         {
-            _Source = new EntityCollection<T, TIdentifier>();
+            Source = new EntityCollection<T, TIdentifier>();
         }
 
-        protected readonly IEntityCollection<T, TIdentifier> _Source;
+        protected IEntityCollection<T, TIdentifier> Source { get; }
     }
 }

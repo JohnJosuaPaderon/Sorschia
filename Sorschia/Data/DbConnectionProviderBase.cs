@@ -18,21 +18,23 @@ namespace Sorschia.Data
         /// <summary>
         /// Initializes a new instance of <see cref="DbConnectionProviderBase{T}"/>
         /// </summary>
-        public DbConnectionProviderBase(IConnectionStringPool connectionStringPool)
+        public DbConnectionProviderBase(IConnectionStringPool connectionStringPool, IProcessContextTransactionManager contextTransactionManager)
         {
-            _ConnectionStringPool = connectionStringPool;
-            _Source = new Dictionary<IProcessContext, T>();
+            ConnectionStringPool = connectionStringPool;
+            ContextTransactionManager = contextTransactionManager;
+            Source = new Dictionary<IProcessContext, T>();
         }
 
         /// <summary>
         /// Read-only source of connection strings
         /// </summary>
-        private readonly IConnectionStringPool _ConnectionStringPool;
+        private IConnectionStringPool ConnectionStringPool { get; }
 
         /// <summary>
         /// Read-only source of database connections
         /// </summary>
-        private readonly Dictionary<IProcessContext, T> _Source;
+        private Dictionary<IProcessContext, T> Source { get; }
+        private IProcessContextTransactionManager ContextTransactionManager { get; }
 
         /// <summary>
         /// Instantiate a concrete instance of <see cref="DbConnection"/>
@@ -45,19 +47,23 @@ namespace Sorschia.Data
         private T Instantiate(IProcessContext context)
         {
             var result = Instantiate();
-            result.ConnectionString = SecureStringConverter.Convert(_ConnectionStringPool.Get(context));
+            result.ConnectionString = SecureStringConverter.Convert(ConnectionStringPool.Get(context));
             return result;
         }
 
         /// <summary>
         /// Registers the database connection to the source
         /// </summary>
-        private void Register(IProcessContext context, T connection)
+        private void TryRegister(IProcessContext context, T connection)
         {
-            if (!_Source.ContainsKey(context))
+            if (!Source.ContainsKey(context))
             {
-                _Source.Add(context, connection);
-                // ProcessContext.TryAddFinalizer(context, Finalize);
+                Source.Add(context, connection);
+
+                if (!ContextTransactionManager.IsEnabled(context))
+                {
+                    ProcessContext.TryAddFinalizer(context, Finalize);
+                }
             }
         }
 
@@ -70,7 +76,7 @@ namespace Sorschia.Data
             {
                 var connection = Instantiate(context);
                 connection.Open();
-                Register(context, connection);
+                TryRegister(context, connection);
                 return connection;
             }
             catch (Exception)
@@ -88,7 +94,7 @@ namespace Sorschia.Data
             {
                 var connection = Instantiate(context);
                 await connection.OpenAsync();
-                Register(context, connection);
+                TryRegister(context, connection);
                 return connection;
             }
             catch (Exception)
@@ -106,7 +112,7 @@ namespace Sorschia.Data
             {
                 var connection = Instantiate(context);
                 await connection.OpenAsync(cancellationToken);
-                Register(context, connection);
+                TryRegister(context, connection);
                 return connection;
             }
             catch (Exception)
@@ -120,9 +126,9 @@ namespace Sorschia.Data
         /// </summary>
         public T Get(IProcessContext context)
         {
-            if (_Source.ContainsKey(context))
+            if (Source.ContainsKey(context))
             {
-                return _Source[context];
+                return Source[context];
             }
             else
             {
@@ -135,9 +141,9 @@ namespace Sorschia.Data
         /// </summary>
         public async Task<T> GetAsync(IProcessContext context)
         {
-            if (_Source.ContainsKey(context))
+            if (Source.ContainsKey(context))
             {
-                return _Source[context];
+                return Source[context];
             }
             else
             {
@@ -150,9 +156,9 @@ namespace Sorschia.Data
         /// </summary>
         public async Task<T> GetAsync(IProcessContext context, CancellationToken cancellationToken)
         {
-            if (_Source.ContainsKey(context))
+            if (Source.ContainsKey(context))
             {
-                return _Source[context];
+                return Source[context];
             }
             else
             {
@@ -165,12 +171,12 @@ namespace Sorschia.Data
         /// </summary>
         public void Finalize(IProcessContext context)
         {
-            if (_Source.ContainsKey(context))
+            if (Source.ContainsKey(context))
             {
-                var connection = _Source[context];
+                var connection = Source[context];
                 connection.Close();
                 connection.Dispose();
-                _Source.Remove(context);
+                Source.Remove(context);
             }
         }
     }

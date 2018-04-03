@@ -9,7 +9,7 @@ namespace Sorschia.Manager
     public abstract class DbEntityManagerBase<T, TId> : DbManagerBase
         where T : IEntity<TId>
     {
-        public DbEntityManagerBase(IProcessContextManager contextManager, IConnectionStringPool connectionStringPool) : base(contextManager, connectionStringPool)
+        public DbEntityManagerBase(IProcessContextManager contextManager, IConnectionStringPool connectionStringPool, IProcessContextTransactionManager contextTransactionManager) : base(contextManager, connectionStringPool, contextTransactionManager)
         {
             Source = new EntityCollection<T, TId>();
         }

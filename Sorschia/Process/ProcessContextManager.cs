@@ -8,21 +8,21 @@ namespace Sorschia.Process
     {
         public ProcessContextManager()
         {
-            _ContextExceptions = new Dictionary<IProcessContext, List<Exception>>();
+            ContextExceptions = new Dictionary<IProcessContext, List<Exception>>();
         }
 
-        private readonly Dictionary<IProcessContext, List<Exception>> _ContextExceptions;
+        private Dictionary<IProcessContext, List<Exception>> ContextExceptions { get; }
         
         public void CatchException(IProcessContext context, Exception exception)
         {
             if (context is ProcessContext concrete)
             {
-                if (!_ContextExceptions.ContainsKey(context))
+                if (!ContextExceptions.ContainsKey(context))
                 {
-                    _ContextExceptions.Add(context, new List<Exception>());
+                    ContextExceptions.Add(context, new List<Exception>());
                 }
 
-                _ContextExceptions[context].Add(exception);
+                ContextExceptions[context].Add(exception);
 
                 concrete.Status = ProcessContextStatus.Faulted;
             }

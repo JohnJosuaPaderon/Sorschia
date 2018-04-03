@@ -12,166 +12,364 @@ namespace Sorschia.Data
     {
         public DbProcessorBase(IProcessContextManager contextManager, IDbCommandCreator<TCommand> commandCreator)
         {
-            _ContextManager = contextManager;
-            _CommandCreator = commandCreator;
+            ContextManager = contextManager;
+            CommandCreator = commandCreator;
         }
 
-        private readonly IDbCommandCreator<TCommand> _CommandCreator;
-        private readonly IProcessContextManager _ContextManager;
+        private IProcessContextManager ContextManager { get; }
+        private IDbCommandCreator<TCommand> CommandCreator { get; }
 
         public T ExecuteNonQuery<T>(IProcessContext context, IDbQuery query, DbProcessorCallback<T, TCommand> callback)
         {
-            using (var command = _CommandCreator.Create(context, query))
+            if (context.Status == ProcessContextStatus.Initialized)
             {
-                return callback(command.ExecuteNonQuery(), command);
+                try
+                {
+                    using (var command = CommandCreator.Create(context, query))
+                    {
+                        return callback(command.ExecuteNonQuery(), command);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ContextManager.CatchException(context, ex);
+                    return default(T);
+                }
+            }
+            else
+            {
+                throw new ProcessContextException("Context is not initialized.");
             }
         }
 
         public async Task<T> ExecuteNonQueryAsync<T>(IProcessContext context, IDbQuery query, DbProcessorCallback<T, TCommand> callback)
         {
-            using (var command = await _CommandCreator.CreateAsync(context, query))
+            if (context.Status == ProcessContextStatus.Initialized)
             {
-                return callback(await command.ExecuteNonQueryAsync(), command);
+                try
+                {
+                    using (var command = await CommandCreator.CreateAsync(context, query))
+                    {
+                        return callback(await command.ExecuteNonQueryAsync(), command);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ContextManager.CatchException(context, ex);
+                    return default(T);
+                }
+            }
+            else
+            {
+                throw new ProcessContextException("Context is not initialized.");
             }
         }
 
         public async Task<T> ExecuteNonQueryAsync<T>(IProcessContext context, IDbQuery query, DbProcessorCallback<T, TCommand> callback, CancellationToken cancellationToken)
         {
-            using (var command = await _CommandCreator.CreateAsync(context, query, cancellationToken))
+            if (context.Status == ProcessContextStatus.Initialized)
             {
-                return callback(await command.ExecuteNonQueryAsync(cancellationToken), command);
+                try
+                {
+                    using (var command = await CommandCreator.CreateAsync(context, query, cancellationToken))
+                    {
+                        return callback(await command.ExecuteNonQueryAsync(cancellationToken), command);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ContextManager.CatchException(context, ex);
+                    return default(T);
+                }
+            }
+            else
+            {
+                throw new ProcessContextException("Context is not initialized.");
             }
         }
 
         public T ExecuteReader<T>(IProcessContext context, IDbQuery query, IDbDataReaderConverter<T> converter)
         {
-            using (var command = _CommandCreator.Create(context, query))
+            if (context.Status == ProcessContextStatus.Initialized)
             {
-                using (var reader = command.ExecuteReader())
+                try
                 {
-                    if (reader.HasRows)
+                    using (var command = CommandCreator.Create(context, query))
                     {
-                        return converter.FromReader(reader);
-                    }
-                    else
-                    {
-                        return default(T);
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                var result = converter.FromReader(reader);
+                                reader.Close();
+                                return result;
+                            }
+                            else
+                            {
+                                reader.Close();
+                                return default(T);
+                            }
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    ContextManager.CatchException(context, ex);
+                    return default(T);
+                }
+            }
+            else
+            {
+                throw new ProcessContextException("Context is not initialized.");
             }
         }
 
         public async Task<T> ExecuteReaderAsync<T>(IProcessContext context, IDbQuery query, IDbDataReaderConverter<T> converter)
         {
-            using (var command = await _CommandCreator.CreateAsync(context, query))
+            if (context.Status == ProcessContextStatus.Initialized)
             {
-                using (var reader = await command.ExecuteReaderAsync())
+                try
                 {
-                    if (reader.HasRows)
+                    using (var command = await CommandCreator.CreateAsync(context, query))
                     {
-                        return await converter.FromReaderAsync(reader);
-                    }
-                    else
-                    {
-                        return default(T);
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            if (reader.HasRows)
+                            {
+                                var result = await converter.FromReaderAsync(reader);
+                                reader.Close();
+                                return result;
+                            }
+                            else
+                            {
+                                reader.Close();
+                                return default(T);
+                            }
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    ContextManager.CatchException(context, ex);
+                    return default(T);
+                }
+            }
+            else
+            {
+                throw new ProcessContextException("Context is not initialized.");
             }
         }
 
         public async Task<T> ExecuteReaderAsync<T>(IProcessContext context, IDbQuery query, IDbDataReaderConverter<T> converter, CancellationToken cancellationToken)
         {
-            using (var command = await _CommandCreator.CreateAsync(context, query, cancellationToken))
+            if (context.Status == ProcessContextStatus.Initialized)
             {
-                using (var reader = await command.ExecuteReaderAsync(cancellationToken))
+                try
                 {
-                    if (reader.HasRows)
+                    using (var command = await CommandCreator.CreateAsync(context, query, cancellationToken))
                     {
-                        return await converter.FromReaderAsync(reader, cancellationToken);
-                    }
-                    else
-                    {
-                        return default(T);
+                        using (var reader = await command.ExecuteReaderAsync(cancellationToken))
+                        {
+                            if (reader.HasRows)
+                            {
+                                var result = await converter.FromReaderAsync(reader, cancellationToken);
+                                reader.Close();
+                                return result;
+                            }
+                            else
+                            {
+                                reader.Close();
+                                return default(T);
+                            }
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    ContextManager.CatchException(context, ex);
+                    return default(T);
+                }
+            }
+            else
+            {
+                throw new ProcessContextException("Context is not initialized.");
             }
         }
 
         public IEnumerable<T> ExecuteReaderEnumerable<T>(IProcessContext context, IDbQuery query, IDbDataReaderConverter<T> converter)
         {
-            using (var command = _CommandCreator.Create(context, query))
+            if (context.Status == ProcessContextStatus.Initialized)
             {
-                using (var reader = command.ExecuteReader())
+                try
                 {
-                    if (reader.HasRows)
+                    using (var command = CommandCreator.Create(context, query))
                     {
-                        return converter.EnumerableFromReader(reader);
-                    }
-                    else
-                    {
-                        return null;
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                var result = converter.EnumerableFromReader(reader);
+                                reader.Close();
+                                return result;
+                            }
+                            else
+                            {
+                                reader.Close();
+                                return null;
+                            }
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    ContextManager.CatchException(context, ex);
+                    return null;
+                }
+            }
+            else
+            {
+                throw new ProcessContextException("Context is not intialized.");
             }
         }
 
         public async Task<IEnumerable<T>> ExecuteReaderEnumerableAsync<T>(IProcessContext context, IDbQuery query, IDbDataReaderConverter<T> converter)
         {
-            using (var command = await _CommandCreator.CreateAsync(context, query))
+            if (context.Status == ProcessContextStatus.Initialized)
             {
-                using (var reader = await command.ExecuteReaderAsync())
+                try
                 {
-                    if (reader.HasRows)
+                    using (var command = await CommandCreator.CreateAsync(context, query))
                     {
-                        return await converter.EnumerableFromReaderAsync(reader);
-                    }
-                    else
-                    {
-                        return null;
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            if (reader.HasRows)
+                            {
+                                var result = await converter.EnumerableFromReaderAsync(reader);
+                                reader.Close();
+                                return result;
+                            }
+                            else
+                            {
+                                reader.Close();
+                                return null;
+                            }
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    ContextManager.CatchException(context, ex);
+                    return null;
+                }
+            }
+            else
+            {
+                throw new ProcessContextException("Context is not intialized.");
             }
         }
 
         public async Task<IEnumerable<T>> ExecuteReaderEnumerableAsync<T>(IProcessContext context, IDbQuery query, IDbDataReaderConverter<T> converter, CancellationToken cancellationToken)
         {
-            using (var command = await _CommandCreator.CreateAsync(context, query, cancellationToken))
+            if (context.Status == ProcessContextStatus.Initialized)
             {
-                using (var reader = await command.ExecuteReaderAsync(cancellationToken))
+                try
                 {
-                    if (reader.HasRows)
+                    using (var command = await CommandCreator.CreateAsync(context, query, cancellationToken))
                     {
-                        return await converter.EnumerableFromReaderAsync(reader, cancellationToken);
-                    }
-                    else
-                    {
-                        return null;
+                        using (var reader = await command.ExecuteReaderAsync(cancellationToken))
+                        {
+                            if (reader.HasRows)
+                            {
+                                var result = await converter.EnumerableFromReaderAsync(reader, cancellationToken);
+                                reader.Close();
+                                return result;
+                            }
+                            else
+                            {
+                                reader.Close();
+                                return null;
+                            }
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    ContextManager.CatchException(context, ex);
+                    return null;
+                }
+            }
+            else
+            {
+                throw new ProcessContextException("Context is not intialized.");
             }
         }
 
         public T ExecuteScalar<T>(IProcessContext context, IDbQuery query, Func<object, T> convert)
         {
-            using (var command = _CommandCreator.Create(context, query))
+            if (context.Status == ProcessContextStatus.Initialized)
             {
-                return convert(command.ExecuteScalar());
+                try
+                {
+                    using (var command = CommandCreator.Create(context, query))
+                    {
+                        return convert(command.ExecuteScalar());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ContextManager.CatchException(context, ex);
+                    return default(T);
+                }
+            }
+            else
+            {
+                throw new ProcessContextException("Context is not initialized.");
             }
         }
 
         public async Task<T> ExecuteScalarAsync<T>(IProcessContext context, IDbQuery query, Func<object, T> convert)
         {
-            using (var command = await _CommandCreator.CreateAsync(context, query))
+            if (context.Status == ProcessContextStatus.Initialized)
             {
-                return convert(await command.ExecuteScalarAsync());
+                try
+                {
+                    using (var command = await CommandCreator.CreateAsync(context, query))
+                    {
+                        return convert(await command.ExecuteScalarAsync());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ContextManager.CatchException(context, ex);
+                    return default(T);
+                }
+            }
+            else
+            {
+                throw new ProcessContextException("Context is not initialized.");
             }
         }
 
         public async Task<T> ExecuteScalarAsync<T>(IProcessContext context, IDbQuery query, Func<object, T> convert, CancellationToken cancellationToken)
         {
-            using (var command = await _CommandCreator.CreateAsync(context, query, cancellationToken))
+            if (context.Status == ProcessContextStatus.Initialized)
             {
-                return convert(await command.ExecuteScalarAsync(cancellationToken));
+                try
+                {
+                    using (var command = await CommandCreator.CreateAsync(context, query, cancellationToken))
+                    {
+                        return convert(await command.ExecuteScalarAsync(cancellationToken));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ContextManager.CatchException(context, ex);
+                    return default(T);
+                }
+            }
+            else
+            {
+                throw new ProcessContextException("Context is not initialized.");
             }
         }
     }

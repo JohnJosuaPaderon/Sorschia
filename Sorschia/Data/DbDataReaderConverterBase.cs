@@ -11,6 +11,16 @@ namespace Sorschia.Data
         public bool MemoryFirst { get; set; }
         protected abstract T Convert(DbDataReader reader);
 
+        protected TDependency TryResolve<TDependency>(ref TDependency backingField)
+        {
+            if (backingField == null)
+            {
+                backingField = ServiceStore.Get<TDependency>();
+            }
+
+            return backingField;
+        }
+
         public virtual void Reset()
         {
             MemoryFirst = ConverterConfiguration.DefaultMemoryFirst;

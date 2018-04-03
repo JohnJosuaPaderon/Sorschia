@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using Sorschia.Process;
+using System.Data.SqlClient;
 
 namespace Sorschia.Data
 {
@@ -7,7 +8,7 @@ namespace Sorschia.Data
     /// </summary>
     internal sealed class SqlConnectionProvider : DbConnectionProviderBase<SqlConnection>, IDbConnectionProvider<SqlConnection>
     {
-        public SqlConnectionProvider(IConnectionStringPool connectionStringPool) : base(connectionStringPool)
+        public SqlConnectionProvider(IConnectionStringPool connectionStringPool, IProcessContextTransactionManager contextTransactionManager) : base(connectionStringPool, contextTransactionManager)
         {
         }
 

@@ -18,6 +18,11 @@ namespace Sorschia
                     "2.1.0-rc1",
                     new string[] { "John Josua R. Paderon" },
                     new DateTime(2018, 3, 15),
+                    "Sorschia V.1"),
+                new ProjectDevelopmentInfo(
+                    "2.2.0",
+                    new string[] { "John Josua R. Paderon" },
+                    new DateTime(2018, 4, 3),
                     "Sorschia V.1")
             };
 
