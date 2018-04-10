@@ -1,4 +1,5 @@
 ﻿using Sorschia.Entity;
+using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Threading;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sorschia.Data
 {
+    [Obsolete]
     public abstract class DbDataReaderConverterBase<T>
     {
         public bool MemoryFirst { get; set; }
@@ -91,6 +93,7 @@ namespace Sorschia.Data
         }
     }
 
+    [Obsolete]
     public abstract class DbDataReaderConverterBase<T, TFields> : DbDataReaderConverterBase<T>
     {
         public DbDataReaderConverterBase(TFields fields)
@@ -101,6 +104,7 @@ namespace Sorschia.Data
         protected TFields Fields { get; }
     }
 
+    [Obsolete]
     public abstract class DbDataReaderConverterBase<T, TId, TFields> : DbDataReaderConverterBase<T, TFields>
        where T : IEntity<TId>
     {

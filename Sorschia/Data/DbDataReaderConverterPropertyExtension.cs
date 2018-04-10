@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 namespace Sorschia.Data
 {
+    [Obsolete]
     public static class DbDataReaderConverterPropertyExtension
     {
         public static T TryGetValue<T>(this DbDataReaderConverterProperty<T> instance, Func<string, T> getPropertry, string name)

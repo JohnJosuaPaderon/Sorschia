@@ -1,5 +1,8 @@
-﻿namespace Sorschia.Data
+﻿using System;
+
+namespace Sorschia.Data
 {
+    [Obsolete]
     public sealed class DbDataReaderConverterProperty<T>
     {
         private T _Value;

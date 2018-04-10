@@ -10,10 +10,7 @@
         /// </summary>
         public void ValidateId(TId id)
         {
-            if (Equals(id, default(TId)))
-            {
-                throw new EntityCollectionValidationException($"Identifier of {typeof(T).FullName} is set to default.");
-            }
+            Validator.Default(id, $"Identifier of {typeof(T).FullName} is set to default.");
         }
 
         /// <summary>
@@ -21,10 +18,7 @@
         /// </summary>
         public void ValidateEntity(T entity)
         {
-            if (Equals(entity, default(T)))
-            {
-                throw new EntityCollectionValidationException($"{typeof(T).FullName} is set to its default value.");
-            }
+            Validator.Default(entity, $"{typeof(T).FullName} is set to its default value.");
         }
     }
 }

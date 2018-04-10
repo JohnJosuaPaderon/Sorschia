@@ -1,8 +1,10 @@
 ﻿using Sorschia.Data;
 using Sorschia.Entity;
+using System;
 
 namespace Sorschia.Converter
 {
+    [Obsolete]
     public abstract class EntityConverterBase<T, TId> : DbDataReaderConverterBase<T>
         where T : IEntity<TId>
     {
@@ -20,6 +22,7 @@ namespace Sorschia.Converter
         }
     }
 
+    [Obsolete]
     public abstract class EntityConverterBase<T, TId, TFields> : EntityConverterBase<T, TId>
         where T : IEntity<TId>
     {

@@ -1,4 +1,5 @@
-﻿using Sorschia.Process;
+﻿using Sorschia.Converter;
+using Sorschia.Process;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -18,6 +19,107 @@ namespace Sorschia.Data
 
         private IProcessContextManager ContextManager { get; }
         private IDbCommandCreator<TCommand> CommandCreator { get; }
+
+        private void ValidateContext(IProcessContext context)
+        {
+            if (context == null)
+            {
+                throw new ProcessContextException("Invalid context.");
+            }
+            else if (context.Status == ProcessContextStatus.Finished)
+            {
+                throw new ProcessContextException("Context is already finished.");
+            }
+            else if (context.Status == ProcessContextStatus.Faulted)
+            {
+                throw new ProcessContextException("Context is faulted.");
+            }
+            else if (context.Status == ProcessContextStatus.NotSet)
+            {
+                throw new ProcessContextException("Context is not initialized.");
+            }
+        }
+
+        public IEnumerable<T> ExecuteIEnumerableRead<T>(IProcessContext context, IDbQuery query, IDataConverter<T> converter)
+        {
+            ValidateContext(context);
+            try
+            {
+                using (var command = CommandCreator.Create(context, query))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            return converter.IEnumerableConvert(reader);
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ContextManager.CatchException(context, ex);
+                return null;
+            }
+        }
+
+        public async Task<IEnumerable<T>> ExecuteIEnumerableReadAsync<T>(IProcessContext context, IDbQuery query, IDataConverter<T> converter)
+        {
+            ValidateContext(context);
+            try
+            {
+                using (var command = await CommandCreator.CreateAsync(context, query))
+                {
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        if (reader.HasRows)
+                        {
+                            return await converter.IEnumerableConvertAsync(reader);
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ContextManager.CatchException(context, ex);
+                return null;
+            }
+        }
+
+        public async Task<IEnumerable<T>> ExecuteIEnumerableReadAsync<T>(IProcessContext context, IDbQuery query, IDataConverter<T> converter, CancellationToken cancellationToken)
+        {
+            ValidateContext(context);
+            try
+            {
+                using (var command = await CommandCreator.CreateAsync(context, query, cancellationToken))
+                {
+                    using (var reader = await command.ExecuteReaderAsync(cancellationToken))
+                    {
+                        if (reader.HasRows)
+                        {
+                            return await converter.IEnumerableConvertAsync(reader, cancellationToken);
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ContextManager.CatchException(context, ex);
+                return null;
+            }
+        }
 
         public T ExecuteNonQuery<T>(IProcessContext context, IDbQuery query, DbProcessorCallback<T, TCommand> callback)
         {
@@ -88,6 +190,88 @@ namespace Sorschia.Data
             }
         }
 
+        public T ExecuteRead<T>(IProcessContext context, IDbQuery query, IDataConverter<T> converter)
+        {
+            ValidateContext(context);
+            try
+            {
+                using (var commad = CommandCreator.Create(context, query))
+                {
+                    using (var reader = commad.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            return converter.Convert(reader);
+                        }
+                        else
+                        {
+                            return default(T);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ContextManager.CatchException(context, ex);
+                return default(T);
+            }
+        }
+
+        public async Task<T> ExecuteReadAsync<T>(IProcessContext context, IDbQuery query, IDataConverter<T> converter)
+        {
+            ValidateContext(context);
+            try
+            {
+                using (var commad = await CommandCreator.CreateAsync(context, query))
+                {
+                    using (var reader = await commad.ExecuteReaderAsync())
+                    {
+                        if (reader.HasRows)
+                        {
+                            return await converter.ConvertAsync(reader);
+                        }
+                        else
+                        {
+                            return default(T);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ContextManager.CatchException(context, ex);
+                return default(T);
+            }
+        }
+
+        public async Task<T> ExecuteReadAsync<T>(IProcessContext context, IDbQuery query, IDataConverter<T> converter, CancellationToken cancellationToken)
+        {
+            ValidateContext(context);
+            try
+            {
+                using (var commad = await CommandCreator.CreateAsync(context, query, cancellationToken))
+                {
+                    using (var reader = await commad.ExecuteReaderAsync(cancellationToken))
+                    {
+                        if (reader.HasRows)
+                        {
+                            return await converter.ConvertAsync(reader, cancellationToken);
+                        }
+                        else
+                        {
+                            return default(T);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ContextManager.CatchException(context, ex);
+                return default(T);
+            }
+        }
+
+        [Obsolete]
         public T ExecuteReader<T>(IProcessContext context, IDbQuery query, IDbDataReaderConverter<T> converter)
         {
             if (context.Status == ProcessContextStatus.Initialized)
@@ -124,6 +308,7 @@ namespace Sorschia.Data
             }
         }
 
+        [Obsolete]
         public async Task<T> ExecuteReaderAsync<T>(IProcessContext context, IDbQuery query, IDbDataReaderConverter<T> converter)
         {
             if (context.Status == ProcessContextStatus.Initialized)
@@ -160,6 +345,7 @@ namespace Sorschia.Data
             }
         }
 
+        [Obsolete]
         public async Task<T> ExecuteReaderAsync<T>(IProcessContext context, IDbQuery query, IDbDataReaderConverter<T> converter, CancellationToken cancellationToken)
         {
             if (context.Status == ProcessContextStatus.Initialized)
@@ -196,6 +382,7 @@ namespace Sorschia.Data
             }
         }
 
+        [Obsolete]
         public IEnumerable<T> ExecuteReaderEnumerable<T>(IProcessContext context, IDbQuery query, IDbDataReaderConverter<T> converter)
         {
             if (context.Status == ProcessContextStatus.Initialized)
@@ -232,6 +419,7 @@ namespace Sorschia.Data
             }
         }
 
+        [Obsolete]
         public async Task<IEnumerable<T>> ExecuteReaderEnumerableAsync<T>(IProcessContext context, IDbQuery query, IDbDataReaderConverter<T> converter)
         {
             if (context.Status == ProcessContextStatus.Initialized)
@@ -268,6 +456,7 @@ namespace Sorschia.Data
             }
         }
 
+        [Obsolete]
         public async Task<IEnumerable<T>> ExecuteReaderEnumerableAsync<T>(IProcessContext context, IDbQuery query, IDbDataReaderConverter<T> converter, CancellationToken cancellationToken)
         {
             if (context.Status == ProcessContextStatus.Initialized)

@@ -1,4 +1,5 @@
 ﻿using Sorschia.Data;
+using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Threading;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sorschia.Process
 {
+    [Obsolete]
     public abstract class DbReadEnumerableProcessBase<T, TCommand, TConverter> : DbProcessBase<TCommand>
         where TCommand : DbCommand
         where TConverter : IDbDataReaderConverter<T>
@@ -41,6 +43,7 @@ namespace Sorschia.Process
         }
     }
 
+    [Obsolete]
     public abstract class DbReadEnumerableProcessBase<T, TCommand, TConverter, TParameters> : DbReadEnumerableProcessBase<T, TCommand, TConverter>
         where TCommand : DbCommand
         where TConverter : IDbDataReaderConverter<T>

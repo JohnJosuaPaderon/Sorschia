@@ -1,4 +1,5 @@
-﻿using Sorschia.Process;
+﻿using Sorschia.Converter;
+using Sorschia.Process;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -15,11 +16,23 @@ namespace Sorschia.Data
         T ExecuteScalar<T>(IProcessContext context, IDbQuery query, Func<object, T> convert);
         Task<T> ExecuteScalarAsync<T>(IProcessContext context, IDbQuery query, Func<object, T> convert);
         Task<T> ExecuteScalarAsync<T>(IProcessContext context, IDbQuery query, Func<object, T> convert, CancellationToken cancellationToken);
+        [Obsolete]
         T ExecuteReader<T>(IProcessContext context, IDbQuery query, IDbDataReaderConverter<T> converter);
+        [Obsolete]
         Task<T> ExecuteReaderAsync<T>(IProcessContext context, IDbQuery query, IDbDataReaderConverter<T> converter);
+        [Obsolete]
         Task<T> ExecuteReaderAsync<T>(IProcessContext context, IDbQuery query, IDbDataReaderConverter<T> converter, CancellationToken cancellationToken);
+        [Obsolete]
         IEnumerable<T> ExecuteReaderEnumerable<T>(IProcessContext context, IDbQuery query, IDbDataReaderConverter<T> converter);
+        [Obsolete]
         Task<IEnumerable<T>> ExecuteReaderEnumerableAsync<T>(IProcessContext context, IDbQuery query, IDbDataReaderConverter<T> converter);
+        [Obsolete]
         Task<IEnumerable<T>> ExecuteReaderEnumerableAsync<T>(IProcessContext context, IDbQuery query, IDbDataReaderConverter<T> converter, CancellationToken cancellationToken);
+        T ExecuteRead<T>(IProcessContext context, IDbQuery query, IDataConverter<T> converter);
+        Task<T> ExecuteReadAsync<T>(IProcessContext context, IDbQuery query, IDataConverter<T> converter);
+        Task<T> ExecuteReadAsync<T>(IProcessContext context, IDbQuery query, IDataConverter<T> converter, CancellationToken cancellationToken);
+        IEnumerable<T> ExecuteIEnumerableRead<T>(IProcessContext context, IDbQuery query, IDataConverter<T> converter);
+        Task<IEnumerable<T>> ExecuteIEnumerableReadAsync<T>(IProcessContext context, IDbQuery query, IDataConverter<T> converter);
+        Task<IEnumerable<T>> ExecuteIEnumerableReadAsync<T>(IProcessContext context, IDbQuery query, IDataConverter<T> converter, CancellationToken cancellationToken);
     }
 }
