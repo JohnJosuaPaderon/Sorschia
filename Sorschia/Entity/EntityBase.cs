@@ -1,14 +1,37 @@
-﻿namespace Sorschia.Entity
+﻿using System;
+
+namespace Sorschia.Entity
 {
     /// <summary>
     /// Base-class for representational data models
     /// </summary>
     public abstract class EntityBase<TId> : IEntity<TId>
     {
+        private TId _id;
+
         /// <summary>
         /// Identifier of data
         /// </summary>
-        public TId Id { get; set; }
+        public TId Id
+        {
+            get { return _id; }
+            set
+            {
+                if (ReadOnlyId)
+                {
+                    throw new InvalidOperationException("Id is read-only.");
+                }
+                else
+                {
+                    if (!Equals(_id, value))
+                    {
+                        _id = value;
+                    }
+                }
+            }
+        }
+
+        protected bool ReadOnlyId { get; set; }
 
         /// <summary>
         /// Determines whether the left and right entity of the same type are equal

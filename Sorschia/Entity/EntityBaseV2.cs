@@ -7,7 +7,7 @@
             Validator.Default(id, "Invalid id.");
         }
 
-        public TId Id { get; }
+        public TId Id { get; set; }
 
         public static bool operator ==(EntityBaseV2<TId> left, EntityBaseV2<TId> right)
         {
