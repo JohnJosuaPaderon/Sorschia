@@ -19,5 +19,15 @@ namespace Sorschia
         {
             return ServiceProvider.GetService<T>();
         }
+
+        public static T TryResolve<T>(ref T backingField)
+        {
+            if (backingField == null)
+            {
+                backingField = ServiceProvider.GetService<T>();
+            }
+
+            return backingField;
+        }
     }
 }
