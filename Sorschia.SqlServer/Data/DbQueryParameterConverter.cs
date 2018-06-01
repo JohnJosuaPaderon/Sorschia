@@ -19,6 +19,11 @@ namespace Sorschia.Data
                 result.SqlDbType = DbQueryParameterTypeConverter.ToSqlDbType(parameter.Type);
             }
 
+            if (parameter.Size > 0)
+            {
+                result.Size = parameter.Size;
+            }
+
             return result;
         }
     }

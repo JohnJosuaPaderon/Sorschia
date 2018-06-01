@@ -6,5 +6,6 @@
         object Value { get; set; }
         DbQueryParameterDirection Direction { get; }
         DbQueryParameterType Type { get; }
+        int Size { get; }
     }
 }

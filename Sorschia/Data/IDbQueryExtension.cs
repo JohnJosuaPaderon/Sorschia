@@ -8,9 +8,21 @@
             return instance;
         }
 
+        public static IDbQuery AddInParameter(this IDbQuery instance, string name, object value, int size)
+        {
+            instance.Parameters.Add(DbQueryParameter.Input(name, value, size));
+            return instance;
+        }
+
         public static IDbQuery AddInParameter(this IDbQuery instance, string name, object value, DbQueryParameterType type)
         {
             instance.Parameters.Add(DbQueryParameter.Input(name, value, type));
+            return instance;
+        }
+
+        public static IDbQuery AddInParameter(this IDbQuery instance, string name, object value, DbQueryParameterType type, int size)
+        {
+            instance.Parameters.Add(DbQueryParameter.Input(name, value, type, size));
             return instance;
         }
 
@@ -20,11 +32,24 @@
             return instance;
         }
 
+        public static IDbQuery AddOutParameter(this IDbQuery instance, string name, DbQueryParameterType type, int size)
+        {
+            instance.Parameters.Add(DbQueryParameter.Output(name, type, size));
+            return instance;
+        }
+
         public static IDbQuery AddInOutParameter(this IDbQuery instance, string name, object value, DbQueryParameterType type)
         {
             instance.Parameters.Add(DbQueryParameter.InputOutput(name, value, type));
             return instance;
         }
+
+        public static IDbQuery AddInOutParameter(this IDbQuery instance, string name, object value, DbQueryParameterType type, int size)
+        {
+            instance.Parameters.Add(DbQueryParameter.InputOutput(name, value, type, size));
+            return instance;
+        }
+
 
         public static IDbQuery AddLogByParameter(this IDbQuery instance, string logBy)
         {
