@@ -16,5 +16,6 @@ namespace Sorschia.Process
         /// Status of the process
         /// </summary>
         ProcessContextStatus Status { get; }
+        bool ThrowExceptions { get; }
     }
 }

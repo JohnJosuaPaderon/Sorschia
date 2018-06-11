@@ -4,7 +4,7 @@ namespace Sorschia.Process
 {
     public interface IProcessContextManager
     {
-        IProcessContext Initialize();
+        IProcessContext Initialize(bool throwExceptions = true);
         void CatchException(IProcessContext context, Exception exception);
         void Finalize(IProcessContext context);
     }

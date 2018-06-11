@@ -17,12 +17,13 @@ namespace Sorschia.Process
             }
         }
 
-        public ProcessContext(IProcessContextManager manager)
+        public ProcessContext(IProcessContextManager manager, bool throwExceptions)
         {
             Manager = manager;
             Key = Guid.NewGuid();
             Status = ProcessContextStatus.NotSet;
             Finalizers = new List<Action<IProcessContext>>();
+            ThrowExceptions = throwExceptions;
         }
 
         private IProcessContextManager Manager { get; }
@@ -30,6 +31,7 @@ namespace Sorschia.Process
         public Guid Key { get; }
         public ProcessContextStatus Status { get; set; }
         public List<Action<IProcessContext>> Finalizers { get; }
+        public bool ThrowExceptions { get; set; }
 
         public void Dispose()
         {

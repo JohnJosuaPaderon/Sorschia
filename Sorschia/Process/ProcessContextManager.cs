@@ -25,6 +25,11 @@ namespace Sorschia.Process
                 ContextExceptions[context].Add(exception);
 
                 concrete.Status = ProcessContextStatus.Faulted;
+
+                if (context.ThrowExceptions)
+                {
+                    throw new Exception("See innerException", exception);
+                }
             }
         }
 
@@ -50,9 +55,9 @@ namespace Sorschia.Process
             }
         }
 
-        public IProcessContext Initialize()
+        public IProcessContext Initialize(bool throwExceptions = true)
         {
-            var context = new ProcessContext(this)
+            var context = new ProcessContext(this, throwExceptions)
             {
                 Status = ProcessContextStatus.Initialized
             };

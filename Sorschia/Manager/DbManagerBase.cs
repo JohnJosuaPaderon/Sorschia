@@ -19,9 +19,9 @@ namespace Sorschia.Manager
         private IProcessContextManager ContextManager { get; }
         private IProcessContextTransactionManager ContextTransactionManager { get; }
 
-        protected IProcessContext InitializeContext(SecureString secureConnectionString, bool enableTransaction = false)
+        protected IProcessContext InitializeContext(SecureString secureConnectionString, bool enableTransaction = false, bool throwExceptions = true)
         {
-            var context = ContextManager.Initialize();
+            var context = ContextManager.Initialize(throwExceptions);
 
             if (enableTransaction)
             {
