@@ -76,4 +76,18 @@ namespace Sorschia.Entity
             return Id.GetHashCode();
         }
     }
+
+    public abstract class EntityBase : EntityBase<Guid>
+    {
+        public EntityBase()
+        {
+            Id = Guid.NewGuid();
+        }
+
+        public EntityBase(Guid id)
+        {
+            Validator.Default(id, "Invalid id.");
+            Id = id;
+        }
+    }
 }
