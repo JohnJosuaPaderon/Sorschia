@@ -4,7 +4,7 @@ using System;
 
 namespace Sorschia.Converter
 {
-    [Obsolete]
+    [Obsolete("This will be removed in the next version.")]
     public abstract class EntityConverterBase<T, TId> : DbDataReaderConverterBase<T>
         where T : IEntity<TId>
     {
@@ -22,7 +22,7 @@ namespace Sorschia.Converter
         }
     }
 
-    [Obsolete]
+    [Obsolete("This will be removed in the next version.")]
     public abstract class EntityConverterBase<T, TId, TFields> : EntityConverterBase<T, TId>
         where T : IEntity<TId>
     {

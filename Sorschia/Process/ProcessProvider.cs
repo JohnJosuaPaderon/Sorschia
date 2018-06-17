@@ -3,7 +3,7 @@ using System;
 
 namespace Sorschia.Process
 {
-    [Obsolete("Use Sorschia.ServiceStore instead.")]
+    [Obsolete("This will be removed in the next version. Use Sorschia.ServiceStore instead.")]
     public static class ProcessProvider
     {
         private static IServiceProvider ServiceProvider;

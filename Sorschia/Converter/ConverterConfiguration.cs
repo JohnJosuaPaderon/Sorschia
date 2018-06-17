@@ -1,4 +1,4 @@
-﻿namespace Sorschia.Data
+﻿namespace Sorschia.Converter
 {
     public static class ConverterConfiguration
     {

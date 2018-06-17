@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Sorschia.Data
 {
+    [Obsolete("This will be removed in the next version.")]
     public interface IDbDataReaderConverter<T>
     {
         void Reset();

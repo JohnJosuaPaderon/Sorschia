@@ -13,14 +13,16 @@ namespace Sorschia
             {
                 SizeToContent = SizeToContent.WidthAndHeight,
                 ShowTitleBar = false,
-                TitlebarHeight = 0,
                 ShowMinButton = false,
                 ShowMaxRestoreButton = false,
                 ShowCloseButton = false,
                 WindowStartupLocation = WindowStartupLocation ?? System.Windows.WindowStartupLocation.CenterScreen,
-                BorderBrush = new SolidColorBrush(Color.FromArgb(50, 0, 0, 0)),
-                BorderThickness = new Thickness(1),
-                Padding = new Thickness(50)
+                BorderThickness = new Thickness(0),
+                GlowBrush = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0)),
+                NonActiveGlowBrush = new SolidColorBrush(Color.FromArgb(255, 0, 255, 0)),
+                WindowTransitionsEnabled = false,
+                ShowInTaskbar = false,
+                ResizeMode = ResizeMode.NoResize
             };
         }
     }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Sorschia.Process
+﻿namespace Sorschia.Process
 {
     public interface IProcessContextTransactionManager
     {

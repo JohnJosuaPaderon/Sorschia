@@ -4,7 +4,7 @@ using System;
 
 namespace Sorschia.Converter
 {
-    [Obsolete]
+    [Obsolete("This will be removed in the next version.")]
     public interface IEntityConverter<T, TId> : IDbDataReaderConverter<T>
         where T : IEntity<TId>
     {

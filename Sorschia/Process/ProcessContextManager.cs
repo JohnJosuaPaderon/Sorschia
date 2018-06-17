@@ -28,7 +28,7 @@ namespace Sorschia.Process
 
                 if (context.ThrowExceptions)
                 {
-                    throw new Exception("See innerException", exception);
+                    throw new ProcessContextException("See innerException", exception);
                 }
             }
         }

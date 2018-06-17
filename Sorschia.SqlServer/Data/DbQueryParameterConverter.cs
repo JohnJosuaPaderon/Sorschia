@@ -11,12 +11,12 @@ namespace Sorschia.Data
             {
                 ParameterName = parameter.Name,
                 Value = parameter.Value ?? DBNull.Value,
-                Direction = DbQueryParameterDirectionConverter.ToNative(parameter.Direction)
+                Direction = parameter.Direction.ToNative()
             };
 
             if (parameter.Type != DbQueryParameterType.NotSet)
             {
-                result.SqlDbType = DbQueryParameterTypeConverter.ToSqlDbType(parameter.Type);
+                result.SqlDbType = parameter.Type.ToSqlDbType();
             }
 
             if (parameter.Size > 0)

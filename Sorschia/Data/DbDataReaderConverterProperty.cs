@@ -2,7 +2,7 @@
 
 namespace Sorschia.Data
 {
-    [Obsolete]
+    [Obsolete("This will be removed in the next version.")]
     public sealed class DbDataReaderConverterProperty<T>
     {
         private T _Value;

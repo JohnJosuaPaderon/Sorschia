@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sorschia.Process
 {
-    [Obsolete]
+    [Obsolete("This will be removed in the next version.")]
     public abstract class DbReadEnumerableProcessBase<T, TCommand, TConverter> : DbProcessBase<TCommand>
         where TCommand : DbCommand
         where TConverter : IDbDataReaderConverter<T>
@@ -43,7 +43,7 @@ namespace Sorschia.Process
         }
     }
 
-    [Obsolete]
+    [Obsolete("This will be removed in the next version.")]
     public abstract class DbReadEnumerableProcessBase<T, TCommand, TConverter, TParameters> : DbReadEnumerableProcessBase<T, TCommand, TConverter>
         where TCommand : DbCommand
         where TConverter : IDbDataReaderConverter<T>

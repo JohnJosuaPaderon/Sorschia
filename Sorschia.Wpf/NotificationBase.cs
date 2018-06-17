@@ -4,9 +4,14 @@ namespace Sorschia
 {
     public abstract class NotificationBase : BindableBase
     {
-        public NotificationBase()
+        public NotificationBase() : this(NotificationVerb.NotSet)
+        {
+        }
+
+        public NotificationBase(NotificationVerb verb)
         {
             Title = string.Empty;
+            Verb = verb;
         }
 
         private string _Title;
@@ -23,11 +28,7 @@ namespace Sorschia
             set { SetProperty(ref _Content, value); }
         }
 
-        private NotificationResult _Result;
-        public NotificationResult Result
-        {
-            get { return _Result; }
-            set { SetProperty(ref _Result, value); }
-        }
+        public NotificationResult Result { get; set; }
+        public NotificationVerb Verb { get; }
     }
 }

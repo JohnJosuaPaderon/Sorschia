@@ -18,6 +18,11 @@ namespace Sorschia
         public DelegateCommand LoadCommand { get; }
         public DelegateCommand UnloadCommand { get; }
 
+        protected void Invoke(Action callback)
+        {
+            System.Windows.Application.Current.Dispatcher.Invoke(callback);
+        }
+
         protected virtual void Load()
         {
             throw new NotImplementedException("View is binded to LoadCommand but not overriden the Load();");
