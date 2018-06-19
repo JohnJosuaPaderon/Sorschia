@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sorschia.OpenSpreadsheet", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorschia.Wpf", "Sorschia.Wpf\Sorschia.Wpf.csproj", "{6C7415C2-C30A-4F76-9D79-2FECAC0F4E09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorschia.Plugins", "Sorschia.Plugins\Sorschia.Plugins.csproj", "{6C78D55C-3D6B-4B14-85D7-415BA36A7740}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{6C7415C2-C30A-4F76-9D79-2FECAC0F4E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C7415C2-C30A-4F76-9D79-2FECAC0F4E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C7415C2-C30A-4F76-9D79-2FECAC0F4E09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C78D55C-3D6B-4B14-85D7-415BA36A7740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C78D55C-3D6B-4B14-85D7-415BA36A7740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C78D55C-3D6B-4B14-85D7-415BA36A7740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C78D55C-3D6B-4B14-85D7-415BA36A7740}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
