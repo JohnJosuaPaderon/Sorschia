@@ -527,5 +527,10 @@ namespace Sorschia.Data
         {
             return ConvertBase(value, formatProvider, ValueConverter.ToUInt64);
         }
+
+        public static Guid ToGuid(object value)
+        {
+            return ConvertBase(value, ValueConverter.ToGuid);
+        }
     }
 }

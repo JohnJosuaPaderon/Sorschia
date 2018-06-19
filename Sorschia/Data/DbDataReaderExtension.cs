@@ -548,5 +548,10 @@ namespace Sorschia.Data
         {
             return instance.Get(fieldName, formatProvider, DbValueConverter.ToUInt64);
         }
+
+        public static Guid GetGuid(this DbDataReader instance, string fieldName)
+        {
+            return instance.Get(fieldName, DbValueConverter.ToGuid);
+        }
     }
 }
