@@ -7,6 +7,17 @@ namespace Sorschia.Entity
     /// </summary>
     public abstract class EntityBase<TId> : IEntity<TId>
     {
+        public EntityBase()
+        {
+
+        }
+
+        public EntityBase(TId id)
+        {
+            Id = id;
+            ReadOnlyId = true;
+        }
+
         private TId _id;
 
         /// <summary>
@@ -74,6 +85,44 @@ namespace Sorschia.Entity
         public override int GetHashCode()
         {
             return Id.GetHashCode();
+        }
+
+        protected void Set<T>(ref T backingField, T value)
+        {
+            if (!Equals(backingField, value))
+            {
+                backingField = value;
+            }
+        }
+
+        protected void Set<T>(ref T backingField, T value, Func<T, bool> validate)
+        {
+            if (!Equals(backingField, value))
+            {
+                if (validate(value))
+                {
+                    backingField = value;
+                }
+                else
+                {
+                    throw new ValidationException("Failed on validating property.", ValidationType.Default);
+                }
+            }
+        }
+
+        protected void Set<T>(ref T backingField, T value, Func<T, bool> validate, string validationFailureMessage)
+        {
+            if (!Equals(backingField, value))
+            {
+                if (validate(value))
+                {
+                    backingField = value;
+                }
+                else
+                {
+                    throw new ValidationException(validationFailureMessage, ValidationType.Default);
+                }
+            }
         }
     }
 

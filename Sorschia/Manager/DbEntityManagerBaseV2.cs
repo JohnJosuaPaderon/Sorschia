@@ -1,4 +1,5 @@
-﻿using Sorschia.Data;
+﻿using Sorschia.Configuration;
+using Sorschia.Data;
 using Sorschia.Entity;
 using Sorschia.Process;
 using System.Collections.Generic;
@@ -6,10 +7,10 @@ using System.Linq;
 
 namespace Sorschia.Manager
 {
-    public abstract class DbEntityManagerBaseV2<T, TId, TConnectionStringProvider> : DbManagerBaseV2<TConnectionStringProvider>
+    public abstract class DbEntityManagerBaseV2<T, TId> : DbManagerBaseV2
         where T : IEntity<TId>
     {
-        public DbEntityManagerBaseV2(IProcessContextManager contextManager, IConnectionStringPool connectionStringPool, IProcessContextTransactionManager contextTransactionManager, TConnectionStringProvider connectionStringProvider) : base(contextManager, connectionStringPool, contextTransactionManager, connectionStringProvider)
+        public DbEntityManagerBaseV2(IProcessContextManager contextManager, IConnectionStringPool connectionStringPool, IProcessContextTransactionManager contextTransactionManager, IConnectionStringManager connectionStringManager) : base(contextManager, connectionStringPool, contextTransactionManager, connectionStringManager)
         {
             Source = new EntityCollection<T, TId>();
         }

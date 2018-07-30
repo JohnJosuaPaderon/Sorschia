@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Sorschia</RootNamespace>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+    <Authors>John Josua R. Paderon</Authors>
+    <Company>Sorschia</Company>
+    <Description>Sorschia Library for integrating NewtonSoft.Json library</Description>
+    <Copyright>Copyright (c) 2018 John Josua R. Paderon</Copyright>
+    <PackageIconUrl>https://raw.githubusercontent.com/JohnJosuaPaderon/Sorschia/master/sorschia_logo.png</PackageIconUrl>
+    <PackageTags>Sorschia Json</PackageTags>
+    <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>3.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sorschia\Sorschia.csproj" />
+  </ItemGroup>
+
+</Project>

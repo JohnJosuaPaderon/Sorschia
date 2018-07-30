@@ -1,4 +1,5 @@
-﻿using Sorschia.Data;
+﻿using Sorschia.Configuration;
+using Sorschia.Data;
 using Sorschia.Process;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,20 +7,20 @@ using System.Security;
 
 namespace Sorschia.Manager
 {
-    public abstract class DbManagerBaseV2<TConnectionStringProvider>
+    public abstract class DbManagerBaseV2
     {
-        public DbManagerBaseV2(IProcessContextManager contextManager, IConnectionStringPool connectionStringPool, IProcessContextTransactionManager contextTransactionManager, TConnectionStringProvider connectionStringProvider)
+        public DbManagerBaseV2(IProcessContextManager contextManager, IConnectionStringPool connectionStringPool, IProcessContextTransactionManager contextTransactionManager, IConnectionStringManager connectionStringManager)
         {
             ContextManager = contextManager;
             ConnectionStringPool = connectionStringPool;
             ContextTransactionManager = contextTransactionManager;
-            ConnectionStringProvider = connectionStringProvider;
+            ConnectionStringManager = connectionStringManager;
         }
 
         private IConnectionStringPool ConnectionStringPool { get; }
         private IProcessContextManager ContextManager { get; }
         private IProcessContextTransactionManager ContextTransactionManager { get; }
-        protected TConnectionStringProvider ConnectionStringProvider { get; }
+        protected IConnectionStringManager ConnectionStringManager { get; }
 
         protected IProcessContext InitializeContext(SecureString secureConnectionString, bool enableTransaction = false, bool throwExceptions = true)
         {
@@ -39,9 +40,9 @@ namespace Sorschia.Manager
         }
     }
 
-    public abstract class DbManagerBaseV2<T, TConnectionStringProvider> : DbManagerBaseV2<TConnectionStringProvider>
+    public abstract class DbManagerBaseV2<T> : DbManagerBaseV2
     {
-        public DbManagerBaseV2(IProcessContextManager contextManager, IConnectionStringPool connectionStringPool, IProcessContextTransactionManager contextTransactionManager, TConnectionStringProvider connectionStringProvider) : base(contextManager, connectionStringPool, contextTransactionManager, connectionStringProvider)
+        public DbManagerBaseV2(IProcessContextManager contextManager, IConnectionStringPool connectionStringPool, IProcessContextTransactionManager contextTransactionManager, IConnectionStringManager connectionStringManager) : base(contextManager, connectionStringPool, contextTransactionManager, connectionStringManager)
         {
             Source = new List<T>();
         }
