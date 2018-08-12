@@ -7,15 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sorschia", "Sorschia\Sorsch
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sorschia.SqlServer", "Sorschia.SqlServer\Sorschia.SqlServer.csproj", "{33150880-5B43-4702-BCE3-607D5FAADB82}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{928DA716-4C4A-45DC-9445-B8BB2A1FB345}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sorschia.OpenSpreadsheet", "Sorschia.OpenSpreadsheet\Sorschia.OpenSpreadsheet.csproj", "{5F4FDAE4-AE7A-4257-B94C-357DCA1FC9E0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorschia.Wpf", "Sorschia.Wpf\Sorschia.Wpf.csproj", "{6C7415C2-C30A-4F76-9D79-2FECAC0F4E09}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sorschia.Plugins", "Sorschia.Plugins\Sorschia.Plugins.csproj", "{6C78D55C-3D6B-4B14-85D7-415BA36A7740}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sorschia.Json", "Sorschia.Json\Sorschia.Json.csproj", "{22CC03C2-DD6F-42C1-99F6-CC4281B8D297}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorschia.EPPlus.Extensions", "Sorschia.EPPlus.Extensions\Sorschia.EPPlus.Extensions.csproj", "{D0ECD160-CF3A-420F-B122-E389A7F220EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +29,6 @@ Global
 		{33150880-5B43-4702-BCE3-607D5FAADB82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33150880-5B43-4702-BCE3-607D5FAADB82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33150880-5B43-4702-BCE3-607D5FAADB82}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5F4FDAE4-AE7A-4257-B94C-357DCA1FC9E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5F4FDAE4-AE7A-4257-B94C-357DCA1FC9E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5F4FDAE4-AE7A-4257-B94C-357DCA1FC9E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5F4FDAE4-AE7A-4257-B94C-357DCA1FC9E0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6C7415C2-C30A-4F76-9D79-2FECAC0F4E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6C7415C2-C30A-4F76-9D79-2FECAC0F4E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C7415C2-C30A-4F76-9D79-2FECAC0F4E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -47,6 +41,10 @@ Global
 		{22CC03C2-DD6F-42C1-99F6-CC4281B8D297}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22CC03C2-DD6F-42C1-99F6-CC4281B8D297}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22CC03C2-DD6F-42C1-99F6-CC4281B8D297}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0ECD160-CF3A-420F-B122-E389A7F220EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0ECD160-CF3A-420F-B122-E389A7F220EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0ECD160-CF3A-420F-B122-E389A7F220EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0ECD160-CF3A-420F-B122-E389A7F220EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

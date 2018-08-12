@@ -95,6 +95,15 @@ namespace Sorschia.Entity
             }
         }
 
+        protected void Set<T>(ref T backingField, T value, Action<T> onChanged)
+        {
+            if (!Equals(backingField, value))
+            {
+                backingField = value;
+                onChanged(value);
+            }
+        }
+
         protected void Set<T>(ref T backingField, T value, Func<T, bool> validate)
         {
             if (!Equals(backingField, value))
@@ -110,6 +119,22 @@ namespace Sorschia.Entity
             }
         }
 
+        protected void Set<T>(ref T backingField, T value, Func<T, bool> validate, Action<T> onChanged)
+        {
+            if (!Equals(backingField, value))
+            {
+                if (validate(value))
+                {
+                    backingField = value;
+                    onChanged(value);
+                }
+                else
+                {
+                    throw new ValidationException("Failed on validating property.", ValidationType.Default);
+                }
+            }
+        }
+
         protected void Set<T>(ref T backingField, T value, Func<T, bool> validate, string validationFailureMessage)
         {
             if (!Equals(backingField, value))
@@ -117,6 +142,22 @@ namespace Sorschia.Entity
                 if (validate(value))
                 {
                     backingField = value;
+                }
+                else
+                {
+                    throw new ValidationException(validationFailureMessage, ValidationType.Default);
+                }
+            }
+        }
+
+        protected void Set<T>(ref T backingField, T value, Func<T, bool> validate, string validationFailureMessage, Action<T> onChanged)
+        {
+            if (!Equals(backingField, value))
+            {
+                if (validate(value))
+                {
+                    backingField = value;
+                    onChanged(value);
                 }
                 else
                 {
