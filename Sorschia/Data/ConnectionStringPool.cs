@@ -10,11 +10,9 @@ namespace Sorschia.Data
         public ConnectionStringPool()
         {
             _Source = new Dictionary<IProcessContext, SecureString>();
-            _Validator = new ConnectionStringPoolValidator();
         }
 
         private readonly Dictionary<IProcessContext, SecureString> _Source;
-        private readonly ConnectionStringPoolValidator _Validator;
 
         private void UnsafeAdd(IProcessContext context, SecureString secureConnectionString)
         {
@@ -27,22 +25,21 @@ namespace Sorschia.Data
 
         public void Add(IProcessContext context, string connectionString)
         {
-            _Validator.ValidateContext(context);
-            _Validator.ValidateConnectionString(connectionString);
+            Validator.Null(context, "Invalid process context.");
+            Validator.NullOrWhiteSpace(connectionString, "Invalid connection string.");
             UnsafeAdd(context, SecureStringConverter.Convert(connectionString));
         }
 
         public void Add(IProcessContext context, SecureString secureConnectionString)
         {
-            _Validator.ValidateContext(context);
-            _Validator.ValidateConnectionString(secureConnectionString);
+            Validator.Null(context, "Invalid process context.");
+            Validator.Null(secureConnectionString, "Invalid secure connection string.");
             UnsafeAdd(context, secureConnectionString);
         }
 
         public SecureString Get(IProcessContext context)
         {
-            _Validator.ValidateContext(context);
-
+            Validator.Null(context, "Invalid process context.");
             if (_Source.ContainsKey(context))
             {
                 return _Source[context];
@@ -55,8 +52,7 @@ namespace Sorschia.Data
 
         public void Finalize(IProcessContext context)
         {
-            _Validator.ValidateContext(context);
-
+            Validator.Null(context, "Invalid process context.");
             if (_Source.ContainsKey(context))
             {
                 var secureConnectionString = _Source[context];
