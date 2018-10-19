@@ -1,45 +1,45 @@
-﻿using Sorschia.Data;
-using System;
+﻿using System;
 using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Sorschia.Process
 {
-    public abstract class DbScalarProcessBase<T, TCommand> : DbProcessBase<TCommand>
+    public abstract class DbScalarProcessBase<TCommand, T> : DbProcessBase<TCommand>
         where TCommand : DbCommand
     {
-        public DbScalarProcessBase(IProcessContextManager contextManager, IDbProcessor<TCommand> processor, Func<object, T> convert, string schema = null) : base(contextManager, processor, schema)
+        public DbScalarProcessBase(Func<object, T> convert, string schemaName = null) : base(schemaName)
         {
+            Validator.Null(convert, "Invalid convert function.");
             Convert = convert;
         }
 
         private Func<object, T> Convert { get; }
 
-        public T Execute(IProcessContext context)
+        public virtual T Execute(IProcessContext context)
         {
-            return Processor.ExecuteScalar(context, ConstructQuery(), Convert);
+            return Processor.ExecuteScalar(context, GetQuery(), Convert);
         }
 
-        public Task<T> ExecuteAsync(IProcessContext context)
+        public virtual Task<T> ExecuteAsync(IProcessContext context)
         {
-            return Processor.ExecuteScalarAsync(context, ConstructQuery(), Convert);
+            return Processor.ExecuteScalarAsync(context, GetQuery(), Convert);
         }
 
-        public Task<T> ExecuteAsync(IProcessContext context, CancellationToken cancellationToken)
+        public virtual Task<T> ExecuteAsync(IProcessContext context, CancellationToken cancellationToken)
         {
-            return Processor.ExecuteScalarAsync(context, ConstructQuery(), Convert, cancellationToken);
+            return Processor.ExecuteScalarAsync(context, GetQuery(), Convert, cancellationToken);
         }
     }
 
-    public abstract class DbScalarProcessBase<T, TParameters, TCommand> : DbScalarProcessBase<T, TCommand>
+    public abstract class DbScalarProcessBase<TCommand, T, TParameters> : DbScalarProcessBase<TCommand, T>
         where TCommand : DbCommand
     {
-        public DbScalarProcessBase(IProcessContextManager contextManager, IDbProcessor<TCommand> processor, TParameters parameters, Func<object, T> convert, string schema = null) : base(contextManager, processor, convert, schema)
+        public DbScalarProcessBase(Func<object, T> convert, string schemaName = null) : base(convert, schemaName)
         {
-            Parameters = parameters;
         }
 
-        protected TParameters Parameters { get; }
+        private TParameters _parameters;
+        protected TParameters Parameters => ServiceStore.TryResolve(ref _parameters);
     }
 }

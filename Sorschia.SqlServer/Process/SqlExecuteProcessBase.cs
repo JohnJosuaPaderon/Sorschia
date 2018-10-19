@@ -1,18 +1,17 @@
-﻿using Sorschia.Data;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 
 namespace Sorschia.Process
 {
-    public abstract class SqlExecuteProcessBase<T> : DbExecuteProcessBase<T, SqlCommand>
+    public abstract class SqlExecuteProcessBase<T> : DbExecuteProcessBase<SqlCommand, T>
     {
-        public SqlExecuteProcessBase(IProcessContextManager contextManager, IDbProcessor<SqlCommand> processor, string schema = null) : base(contextManager, processor, schema)
+        public SqlExecuteProcessBase(string schemaName = null) : base(schemaName)
         {
         }
     }
 
-    public abstract class SqlExecuteProcessBase<T, TParameters> : DbExecuteProcessBase<T, SqlCommand, TParameters>
+    public abstract class SqlExecuteProcessBase<T, TParameters> : DbExecuteProcessBase<SqlCommand, T, TParameters>
     {
-        public SqlExecuteProcessBase(IProcessContextManager contextManager, IDbProcessor<SqlCommand> processor, TParameters parameters, string schema = null) : base(contextManager, processor, parameters, schema)
+        public SqlExecuteProcessBase(string schemaName = null) : base(schemaName)
         {
         }
     }

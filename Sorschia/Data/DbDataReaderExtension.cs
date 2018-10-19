@@ -23,8 +23,21 @@ namespace Sorschia.Data
 
             if (reader.FieldCount <= 0)
             {
-                throw new ArgumentException("reader has not fields.", nameof(reader));
+                throw new ArgumentException("reader has no fields.", nameof(reader));
             }
+        }
+
+        private static bool ColumnExists(DbDataReader reader, string fieldName)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                if (string.Equals(reader.GetName(i), fieldName, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -33,7 +46,7 @@ namespace Sorschia.Data
         private static T Get<T>(this DbDataReader instance, string fieldName, Func<object, T> convert)
         {
             Validate(instance, fieldName);
-            return convert(instance[fieldName]);
+            return ColumnExists(instance, fieldName) ? convert(instance[fieldName]) : default(T);
         }
 
         /// <summary>
@@ -42,7 +55,7 @@ namespace Sorschia.Data
         private static T Get<T>(this DbDataReader instance, string fieldName, IFormatProvider formatProvider, Func<object, IFormatProvider, T> convert)
         {
             Validate(instance, fieldName);
-            return convert(instance[fieldName], formatProvider);
+            return ColumnExists(instance, fieldName) ? convert(instance[fieldName], formatProvider) : default(T);
         }
 
         /// <summary>

@@ -1,16 +1,15 @@
-﻿namespace Sorschia.Process
-{
-    public abstract class ProcessBase : ProcessCoreBase
-    {
-        public ProcessBase(IProcessContextManager contextManager) : base(contextManager)
-        {
-        }
-    }
+﻿using System;
 
-    public abstract class ProcessBase<T> : ProcessCoreBase
+namespace Sorschia.Process
+{
+    public abstract class ProcessBase : IDisposable
     {
-        public ProcessBase(IProcessContextManager contextManager) : base(contextManager)
+        private IProcessContextManager _contextManager;
+        protected IProcessContextManager ContextManager => ServiceStore.TryResolve(ref _contextManager);
+
+        public virtual void Dispose()
         {
+            //TODO: Release resources
         }
     }
 }

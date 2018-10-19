@@ -1,14 +1,13 @@
-﻿using Sorschia.Data;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Sorschia.Process
 {
-    public abstract class DbExecuteProcessBase<T, TCommand> : DbProcessBase<TCommand>
+    public abstract class DbExecuteProcessBase<TCommand, T> : DbProcessBase<TCommand>
         where TCommand : DbCommand
     {
-        public DbExecuteProcessBase(IProcessContextManager contextManager, IDbProcessor<TCommand> processor, string schema = null) : base(contextManager, processor, schema)
+        public DbExecuteProcessBase(string schemaName = null) : base(schemaName)
         {
         }
 
@@ -16,28 +15,28 @@ namespace Sorschia.Process
 
         public T Execute(IProcessContext context)
         {
-            return Processor.ExecuteNonQuery(context, ConstructQuery(), Callback);
+            return Processor.ExecuteNonQuery(context, GetQuery(), Callback);
         }
 
         public Task<T> ExecuteAsync(IProcessContext context)
         {
-            return Processor.ExecuteNonQueryAsync(context, ConstructQuery(), Callback);
+            return Processor.ExecuteNonQueryAsync(context, GetQuery(), Callback);
         }
 
         public Task<T> ExecuteAsync(IProcessContext context, CancellationToken cancellationToken)
         {
-            return Processor.ExecuteNonQueryAsync(context, ConstructQuery(), Callback, cancellationToken);
+            return Processor.ExecuteNonQueryAsync(context, GetQuery(), Callback, cancellationToken);
         }
     }
 
-    public abstract class DbExecuteProcessBase<T, TCommand, TParameters> : DbExecuteProcessBase<T, TCommand>
+    public abstract class DbExecuteProcessBase<TCommand, T, TParameters> : DbExecuteProcessBase<TCommand, T>
         where TCommand : DbCommand
     {
-        public DbExecuteProcessBase(IProcessContextManager contextManager, IDbProcessor<TCommand> processor, TParameters parameters, string schema = null) : base(contextManager, processor, schema)
+        public DbExecuteProcessBase(string schemaName = null) : base(schemaName)
         {
-            Parameters = parameters;
         }
 
-        protected TParameters Parameters { get; }
+        private TParameters _parameters;
+        protected TParameters Parameters => ServiceStore.TryResolve(ref _parameters);
     }
 }
