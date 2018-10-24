@@ -1,26 +1,44 @@
-﻿namespace Sorschia.Convention
+﻿using System.Runtime.CompilerServices;
+
+namespace Sorschia.Convention
 {
     public class ModelParameters
     {
-        public ModelParameters(IParameterNameFormatter formatter)
-        {
-            CreatedBy = formatter.Format(nameof(CreatedBy));
-            DateCreated = formatter.Format(nameof(DateCreated));
-            ModifiedBy = formatter.Format(nameof(ModifiedBy));
-            DateModified = formatter.Format(nameof(DateModified));
-            DeletedBy = formatter.Format(nameof(DeletedBy));
-            DateDeleted = formatter.Format(nameof(DateDeleted));
-            LogBy = formatter.Format(nameof(LogBy));
-            LogDate = formatter.Format(nameof(LogDate));
-        }
+        private IParameterNameFormatter _formatter;
+        protected IParameterNameFormatter Formatter => ServiceStore.TryResolve(ref _formatter);
 
-        public string CreatedBy { get; }
-        public string DateCreated { get; }
-        public string ModifiedBy { get; }
-        public string DateModified { get; }
-        public string DeletedBy { get; }
-        public string DateDeleted { get; }
-        public string LogBy { get; }
-        public string LogDate { get; }
+        private string _createdBy;
+        public string CreatedBy => TryFormat(ref _createdBy);
+
+        private string _dateCreated;
+        public string DateCreated => TryFormat(ref _dateCreated);
+
+        private string _modifiedBy;
+        public string ModifiedBy => TryFormat(ref _modifiedBy);
+
+        private string _dateModified;
+        public string DateModified => TryFormat(ref _dateModified);
+
+        private string _deletedBy;
+        public string DeletedBy => TryFormat(ref _deletedBy);
+
+        private string _dateDeleted;
+        public string DateDeleted => TryFormat(ref _dateDeleted);
+
+        private string _logBy;
+        public string LogBy => TryFormat(ref _logBy);
+
+        private string _logDate;
+        public string LogDate => TryFormat(ref _logDate);
+
+        protected string TryFormat(ref string backingField, [CallerMemberName]string value = null)
+        {
+            if (string.IsNullOrWhiteSpace(backingField))
+            {
+                backingField = Formatter.Format(value);
+            }
+
+            return backingField;
+        }
     }
 }

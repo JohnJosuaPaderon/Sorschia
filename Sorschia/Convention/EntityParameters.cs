@@ -2,11 +2,7 @@
 {
     public class EntityParameters : ModelParameters
     {
-        public EntityParameters(IParameterNameFormatter formatter) : base(formatter)
-        {
-            Id = formatter.Format(nameof(Id));
-        }
-
-        public string Id { get; }
+        private string _id;
+        public string Id => TryFormat(ref _id);
     }
 }
