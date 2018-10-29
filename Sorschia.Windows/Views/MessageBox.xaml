@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="Sorschia.Views.MessageBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:Sorschia.Converters"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             prism:ViewModelLocator.AutoWireViewModel="True" Background="{DynamicResource MaterialDesignBackground}" MinWidth="450" MaxWidth="450" MinHeight="250" MaxHeight="500">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Styles/All.xaml"/>
+    </UserControl.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadCommand}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding UnloadCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid Margin="{DynamicResource GridMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Visibility="{Binding Header,Converter={x:Static converters:NullableVisibilityConverter.Instance}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{Binding Header,FallbackValue='Header'}" Style="{DynamicResource CardHeaderTextBlock}"/>
+            </Grid>
+            <Separator Grid.Row="1"/>
+        </Grid>
+        <Grid Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="{DynamicResource GridSpace}"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <materialDesign:PackIcon Grid.Row="0" Kind="{Binding Image,Converter={x:Static converters:MessageBoxImagePackIconKindConverter.Instance},FallbackValue=Information}" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource AccentColorBrush}" Margin="0"/>
+            <TextBlock Grid.Row="2" Text="{Binding Message,FallbackValue='Message'}" TextWrapping="WrapWithOverflow" TextAlignment="Justify" VerticalAlignment="Center" Foreground="#555"/>
+        </Grid>
+        <Separator Grid.Row="2"/>
+        <Grid Grid.Row="3" HorizontalAlignment="Right">
+            <Grid.Resources>
+                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource CardFooterButton}"/>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="OK" Command="{Binding SubmitCommand}" CommandParameter="OK" Visibility="{Binding Button,Converter={x:Static converters:MessageBoxButtonVisibilityConverter.Instance},ConverterParameter='OK',FallbackValue=Visible}"/>
+            <Button Grid.Column="1" Content="Yes" Command="{Binding SubmitCommand}" CommandParameter="Yes" Visibility="{Binding Button,Converter={x:Static converters:MessageBoxButtonVisibilityConverter.Instance},ConverterParameter='Yes',FallbackValue=Visible}"/>
+            <Button Grid.Column="2" Content="No" Command="{Binding SubmitCommand}" CommandParameter="No" Visibility="{Binding Button,Converter={x:Static converters:MessageBoxButtonVisibilityConverter.Instance},ConverterParameter='No',FallbackValue=Visible}"/>
+            <Button Grid.Column="3" Content="Cancel" Command="{Binding SubmitCommand}" CommandParameter="Cancel" Visibility="{Binding Button,Converter={x:Static converters:MessageBoxButtonVisibilityConverter.Instance},ConverterParameter='Cancel',FallbackValue=Visible}"/>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sorschia.Plugins", "Sorschi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sorschia.Json", "Sorschia.Json\Sorschia.Json.csproj", "{22CC03C2-DD6F-42C1-99F6-CC4281B8D297}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorschia.Windows", "Sorschia.Windows\Sorschia.Windows.csproj", "{2E99C294-A577-497E-B6DA-28D74CA307F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorschia.Windows.TestApp", "Sorschia.Windows.TestApp\Sorschia.Windows.TestApp.csproj", "{B6FA0716-CE3C-4B4F-B471-E836D7FBE63F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{22CC03C2-DD6F-42C1-99F6-CC4281B8D297}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22CC03C2-DD6F-42C1-99F6-CC4281B8D297}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22CC03C2-DD6F-42C1-99F6-CC4281B8D297}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E99C294-A577-497E-B6DA-28D74CA307F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E99C294-A577-497E-B6DA-28D74CA307F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E99C294-A577-497E-B6DA-28D74CA307F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E99C294-A577-497E-B6DA-28D74CA307F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6FA0716-CE3C-4B4F-B471-E836D7FBE63F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6FA0716-CE3C-4B4F-B471-E836D7FBE63F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6FA0716-CE3C-4B4F-B471-E836D7FBE63F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6FA0716-CE3C-4B4F-B471-E836D7FBE63F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
