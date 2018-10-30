@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Sorschia.Data;
+using System;
 using System.Data.Common;
 using System.IO;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     /// <summary>
     /// Contains extension methods for <see cref="DbParameterCollection"/>

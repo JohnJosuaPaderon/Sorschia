@@ -1,13 +1,13 @@
 ﻿using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
 using Prism.Regions;
+using Sorschia.Configuration;
 using Sorschia.Events;
 using Sorschia.Models;
-using System.Windows;
 
 namespace Sorschia.ViewModels
 {
-    public class MainWindowViewModel : NavigationViewModelBase
+    public sealed class MainWindowViewModel : NavigationViewModelBase
     {
         public MainWindowViewModel(IEventAggregator eventAggregator, IRegionManager regionManager) : base(eventAggregator, regionManager)
         {
@@ -18,14 +18,31 @@ namespace Sorschia.ViewModels
             MessageBoxEvent.Subscribe(MessageBoxEventRaised);
         }
 
+        private IConfigurationProvider _configurationProvider;
+        private IConfigurationProvider ConfigurationProvider => ServiceStore.TryResolve(ref _configurationProvider);
+
         public InteractionRequest<MessageBoxNotification> MessageBoxRequest { get; }
         public PopupStateEvent PopupStateEvent { get; }
-
+        
         private string _title;
         public string Title
         {
             get { return _title; }
             set { SetProperty(ref _title, value); }
+        }
+
+        private string _windowState;
+        public string WindowState
+        {
+            get { return _windowState; }
+            set { SetProperty(ref _windowState, value); }
+        }
+
+        private int? _titlebarHeight;
+        public int? TitlebarHeight
+        {
+            get { return _titlebarHeight; }
+            set { SetProperty(ref _titlebarHeight, value); }
         }
 
         private bool _isWindowBusy;
@@ -51,13 +68,14 @@ namespace Sorschia.ViewModels
 
         private void LoadConfigValues()
         {
-            Title = "Sorschia";
+            Title = ConfigurationProvider.GetString("sorschia:MainWindow.Title") ?? string.Empty;
+            WindowState = ConfigurationProvider.GetString("sorschia:MainWindow.WindowState") ?? "Normal";
+            TitlebarHeight = ConfigurationProvider.GetNullableInt32("sorschia:MainWindow.TitlebarHeight");
         }
 
         protected override void Load()
         {
             LoadConfigValues();
-            MessageBoxEvent.Raise("We display message on purpose", button: MessageBoxButton.YesNoCancel, image: MessageBoxImage.Error);
         }
 
         private void MessageBoxEventRaised(MMessageBox payload)

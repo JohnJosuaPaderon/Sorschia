@@ -1,6 +1,7 @@
-﻿using System.Data;
+﻿using Sorschia.Data;
+using System.Data;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     public static class DbQueryParameterDirectionExtension
     {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Sorschia.Configuration;
 
-namespace Sorschia.Configuration
+namespace Sorschia
 {
     public static class IServiceCollectionExtension
     {

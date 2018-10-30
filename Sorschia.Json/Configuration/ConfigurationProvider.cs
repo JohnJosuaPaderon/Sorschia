@@ -23,15 +23,11 @@ namespace Sorschia.Configuration
         {
             if (Source.Any())
             {
-                var json = new JArray();
+                var json = new JObject();
 
                 foreach (var item in Source)
                 {
-                    json.Add(new JObject
-                    {
-                        { FIELD_KEY, item.Key },
-                        { FIELD_VALUE, new JValue(item.Value) }
-                    });
+                    json.Add(item.Key, new JValue(item.Value));
                 }
 
                 using (var writer = File.CreateText(SourceFileProvider.Path))
@@ -54,12 +50,12 @@ namespace Sorschia.Configuration
                 {
                     using (var textReader = new JsonTextReader(reader))
                     {
-                        var json = (JArray)JToken.ReadFrom(textReader);
+                        var json = (JObject)JToken.ReadFrom(textReader);
                         var result = new List<(string key, object value)>();
 
-                        foreach (JObject item in json)
+                        foreach (var item in json)
                         {
-                            result.Add((item[FIELD_KEY].ToString(), (object)item[FIELD_VALUE]));
+                            result.Add((item.Key, item.Value.Type == JTokenType.Null ? null : item.Value));
                         }
 
                         return result;

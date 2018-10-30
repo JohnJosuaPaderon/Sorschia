@@ -69,6 +69,8 @@ namespace Sorschia.Configuration
                         }
                     }
                 }
+
+                IsLoaded = true;
             }
         }
 

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Specialized;
 
-namespace Sorschia.Extensions
+namespace Sorschia
 {
     public static class NameValueCollectionExtension
     {

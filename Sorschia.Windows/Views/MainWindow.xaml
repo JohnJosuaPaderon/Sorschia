@@ -10,7 +10,8 @@
                      xmlns:local="clr-namespace:Sorschia.Views"
                      prism:ViewModelLocator.AutoWireViewModel="True"
                      Title="{Binding Title}"
-                     WindowState="Maximized">
+                     WindowState="{Binding WindowState}"
+                     TitlebarHeight="{Binding TitlebarHeight}">
     <mahApps:MetroWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
