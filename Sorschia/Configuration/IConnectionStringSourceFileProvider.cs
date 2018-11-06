@@ -1,4 +1,4 @@
-﻿namespace Sorschia.Configuration
+﻿namespace Sorschia
 {
     public interface IConnectionStringSourceFileProvider
     {

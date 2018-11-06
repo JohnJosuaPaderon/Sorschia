@@ -1,7 +1,6 @@
-﻿using Sorschia.Process;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     internal sealed class SqlTransactionProvider : DbTransactionProviderBase<SqlConnection, SqlTransaction>, IDbTransactionProvider<SqlTransaction>
     {

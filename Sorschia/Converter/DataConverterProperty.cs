@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Sorschia.Converter
+namespace Sorschia
 {
     public sealed class DataConverterProperty<T>
     {

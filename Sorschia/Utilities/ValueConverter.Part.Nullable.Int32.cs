@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sorschia.Utilities
+namespace Sorschia
 {
     partial class ValueConverter
     {

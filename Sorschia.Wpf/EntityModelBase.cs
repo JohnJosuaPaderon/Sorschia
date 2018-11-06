@@ -1,6 +1,4 @@
-﻿using Sorschia.Entity;
-
-namespace Sorschia
+﻿namespace Sorschia
 {
     public abstract class EntityModelBase<T, TId> : ModelBase<T>
        where T : IEntity<TId>

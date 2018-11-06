@@ -1,6 +1,6 @@
 ﻿using System.Security;
 
-namespace Sorschia.Configuration
+namespace Sorschia
 {
     public interface IConnectionStringManager
     {

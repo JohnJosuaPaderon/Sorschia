@@ -1,7 +1,6 @@
-﻿using Sorschia.Converter;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 
-namespace Sorschia.Process
+namespace Sorschia
 {
     public abstract class SqlReadProcessBase<T, TConverter> : DbReadProcessBase<SqlCommand, T, TConverter>
         where TConverter : IDataConverter<T>

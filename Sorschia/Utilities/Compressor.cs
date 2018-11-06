@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.IO.Compression;
 
-namespace Sorschia.Utilities
+namespace Sorschia
 {
     /// <summary>
     /// Exposes functions that compress and decompress <see cref="byte"/>[]

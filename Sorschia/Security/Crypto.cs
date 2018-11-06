@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Sorschia.Security
+namespace Sorschia
 {
     public static class Crypto
     {

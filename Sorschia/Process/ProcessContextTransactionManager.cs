@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Sorschia.Process
+namespace Sorschia
 {
     internal sealed class ProcessContextTransactionManager : IProcessContextTransactionManager
     {

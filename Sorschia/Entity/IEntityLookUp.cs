@@ -1,4 +1,4 @@
-﻿namespace Sorschia.Entity
+﻿namespace Sorschia
 {
     public interface IEntityLookUp<T>
     {

@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Sorschia.Data;
 using System.Data.SqlClient;
 
 namespace Sorschia

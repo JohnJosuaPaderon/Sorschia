@@ -1,7 +1,6 @@
-﻿using Sorschia.Process;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     /// <summary>
     /// Managing SQL Server Database Connections

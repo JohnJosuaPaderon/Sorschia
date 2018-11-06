@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlClient;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     internal sealed class SqlCommandCreator : DbCommandCreatorBase<SqlConnection, SqlTransaction, SqlCommand, SqlParameter>, IDbCommandCreator<SqlCommand>
     {

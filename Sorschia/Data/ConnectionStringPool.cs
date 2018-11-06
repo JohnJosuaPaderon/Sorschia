@@ -1,9 +1,7 @@
-﻿using Sorschia.Process;
-using Sorschia.Security;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Security;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     internal sealed class ConnectionStringPool : IConnectionStringPool
     {

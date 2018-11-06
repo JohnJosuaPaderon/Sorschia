@@ -1,10 +1,9 @@
-﻿using Sorschia.Converter;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Sorschia.Process
+namespace Sorschia
 {
     public abstract class DbReadIEnumerableProcessBase<TCommand, T, TConverter> : DbProcessBase<TCommand>
         where TCommand : DbCommand

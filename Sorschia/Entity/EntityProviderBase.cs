@@ -1,4 +1,4 @@
-﻿namespace Sorschia.Entity
+﻿namespace Sorschia
 {
     public abstract class EntityProviderBase<T, TEntityLookUp>
         where TEntityLookUp : IEntityLookUp<T>

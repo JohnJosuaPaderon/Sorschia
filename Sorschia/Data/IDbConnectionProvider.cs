@@ -1,9 +1,8 @@
-﻿using Sorschia.Process;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     /// <summary>
     /// Manages database connections

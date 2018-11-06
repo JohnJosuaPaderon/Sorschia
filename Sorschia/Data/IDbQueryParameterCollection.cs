@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     public interface IDbQueryParameterCollection : IEnumerable<IDbQueryParameter>
     {

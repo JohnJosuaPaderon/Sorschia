@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace Sorschia.Convention
+namespace Sorschia
 {
     public class ModelParameters
     {

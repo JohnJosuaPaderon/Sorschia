@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace Sorschia.Security
+namespace Sorschia
 {
     /// <summary>
     /// Exposes functions that converts <see cref="string"/> and <see cref="SecureString"/>

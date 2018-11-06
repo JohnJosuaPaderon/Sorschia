@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sorschia.Process
+namespace Sorschia
 {
     public abstract class ProcessBase : IDisposable
     {

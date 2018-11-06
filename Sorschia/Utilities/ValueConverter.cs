@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sorschia.Utilities
+namespace Sorschia
 {
     /// <summary>
     /// Exposes functions that convert a type to another type.

@@ -1,4 +1,4 @@
-﻿namespace Sorschia.Entity
+﻿namespace Sorschia
 {
     /// <summary>
     /// Exposes validation methods for <see cref="EntityCollection{T, TId}"/> class

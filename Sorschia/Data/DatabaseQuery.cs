@@ -1,7 +1,6 @@
-﻿using Sorschia.Process;
-using System;
+﻿using System;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     public class DatabaseQuery : IDisposable
     {

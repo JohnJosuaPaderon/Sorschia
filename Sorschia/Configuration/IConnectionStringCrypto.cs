@@ -1,6 +1,4 @@
-﻿using Sorschia.Security;
-
-namespace Sorschia.Configuration
+﻿namespace Sorschia
 {
     public interface IConnectionStringCrypto : ICrypto
     {

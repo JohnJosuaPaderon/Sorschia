@@ -1,11 +1,10 @@
-﻿using Sorschia.Process;
-using System;
+﻿using System;
 using System.Data;
 using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     public abstract class DbCommandCreatorBase<TConnection, TTransaction, TCommand, TParameter> : IDbCommandCreator<TCommand>
         where TConnection : DbConnection

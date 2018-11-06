@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     public static class DbQueryFactory
     {

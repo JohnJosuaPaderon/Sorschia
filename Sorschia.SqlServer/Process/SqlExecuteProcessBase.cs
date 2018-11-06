@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlClient;
 
-namespace Sorschia.Process
+namespace Sorschia
 {
     public abstract class SqlExecuteProcessBase<T> : DbExecuteProcessBase<SqlCommand, T>
     {

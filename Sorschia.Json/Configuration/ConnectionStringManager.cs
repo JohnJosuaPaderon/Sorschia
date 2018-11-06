@@ -1,11 +1,10 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Sorschia.Security;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Sorschia.Configuration
+namespace Sorschia
 {
     internal sealed class ConnectionStringManager : ConnectionStringManagerBase, IConnectionStringManager
     {

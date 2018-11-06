@@ -1,4 +1,4 @@
-﻿namespace Sorschia.Process
+﻿namespace Sorschia
 {
     /// <summary>
     /// Status for <see cref="IProcessContext"/>

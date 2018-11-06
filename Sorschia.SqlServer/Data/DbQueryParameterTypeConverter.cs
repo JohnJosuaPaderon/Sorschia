@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     internal static class DbQueryParameterTypeConverter
     {

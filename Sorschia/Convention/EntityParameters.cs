@@ -1,4 +1,4 @@
-﻿namespace Sorschia.Convention
+﻿namespace Sorschia
 {
     public class EntityParameters : ModelParameters
     {

@@ -1,4 +1,4 @@
-﻿namespace Sorschia.Entity
+﻿namespace Sorschia
 {
     /// <summary>
     /// A representational data that has an identifier

@@ -1,7 +1,6 @@
-﻿using Sorschia.Process;
-using System.Data.Common;
+﻿using System.Data.Common;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     /// <summary>
     /// Manages database transactions

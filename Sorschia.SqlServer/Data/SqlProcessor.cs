@@ -1,7 +1,6 @@
-﻿using Sorschia.Process;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     internal sealed class SqlProcessor : DbProcessorBase<SqlCommand>, IDbProcessor<SqlCommand>
     {

@@ -1,7 +1,6 @@
-﻿using Sorschia.Data;
-using System.Data.Common;
+﻿using System.Data.Common;
 
-namespace Sorschia.Process
+namespace Sorschia
 {
     public abstract class DbProcessBase<TCommand> : ProcessBase
         where TCommand : DbCommand

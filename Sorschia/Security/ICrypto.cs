@@ -1,4 +1,4 @@
-﻿namespace Sorschia.Security
+﻿namespace Sorschia
 {
     public interface ICrypto
     {

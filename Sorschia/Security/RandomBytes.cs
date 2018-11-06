@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace Sorschia.Security
+namespace Sorschia
 {
     public static class RandomBytes
     {

@@ -1,12 +1,8 @@
-﻿using Sorschia.Configuration;
-using Sorschia.Data;
-using Sorschia.Entity;
-using Sorschia.Process;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security;
 
-namespace Sorschia.Manager
+namespace Sorschia
 {
     public abstract class ManagerBase
     {

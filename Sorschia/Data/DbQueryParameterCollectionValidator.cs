@@ -1,4 +1,6 @@
-﻿namespace Sorschia.Data
+﻿using System;
+
+namespace Sorschia
 {
     internal sealed class DbQueryParameterCollectionValidator
     {
@@ -6,7 +8,7 @@
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new DbQueryParameterValidationException("Parameter name is invalid.");
+                throw new Exception("Parameter name is invalid.");
             }
         }
 
@@ -14,7 +16,7 @@
         {
             if (parameter == null)
             {
-                throw new DbQueryParameterValidationException("Parameter is set to null.");
+                throw new Exception("Parameter is set to null.");
             }
         }
     }

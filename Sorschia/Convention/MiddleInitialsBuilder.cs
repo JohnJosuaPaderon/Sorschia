@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Sorschia.Convention
+namespace Sorschia
 {
     internal sealed class MiddleInitialsBuilder : NameBuilderBase, IMiddleInitialsBuilder
     {

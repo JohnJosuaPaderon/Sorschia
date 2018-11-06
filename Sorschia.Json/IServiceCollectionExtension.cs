@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Sorschia.Configuration;
 
 namespace Sorschia
 {

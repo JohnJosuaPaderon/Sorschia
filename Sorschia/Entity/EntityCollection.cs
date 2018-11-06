@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace Sorschia.Entity
+namespace Sorschia
 {
     /// <summary>
     /// A collection of entities with same type

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     internal sealed class DbQueryParameterCollection : IDbQueryParameterCollection
     {

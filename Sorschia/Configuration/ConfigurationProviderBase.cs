@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Sorschia.Configuration
+namespace Sorschia
 {
     public abstract class ConfigurationProviderBase
     {

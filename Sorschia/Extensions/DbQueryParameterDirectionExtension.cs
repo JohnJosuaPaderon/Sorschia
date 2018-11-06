@@ -1,5 +1,4 @@
-﻿using Sorschia.Data;
-using System.Data;
+﻿using System.Data;
 
 namespace Sorschia
 {

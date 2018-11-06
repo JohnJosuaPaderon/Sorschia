@@ -1,10 +1,9 @@
-﻿using Sorschia.Security;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
 
-namespace Sorschia.Configuration
+namespace Sorschia
 {
     public abstract class ConnectionStringManagerBase
     {

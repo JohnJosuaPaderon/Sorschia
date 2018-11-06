@@ -5,12 +5,12 @@
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <RootNamespace>Sorschia</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>4.0.0</Version>
+    <Version>5.0.0</Version>
     <Authors>John Josua R. Paderon</Authors>
     <Company>Sorschia</Company>
     <Description>Sorschia Library for integrating Microsoft SQL Server.</Description>
     <Copyright>Copyright (c) 2018 John Josua R. Paderon</Copyright>
-    <PackageReleaseNotes>Various changes. May cause compile-time errors.</PackageReleaseNotes>
+    <PackageReleaseNotes>Removed unnecessary exception classes, clean-up namespace.</PackageReleaseNotes>
     <PackageTags>Sorschia</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/JohnJosuaPaderon/Sorschia/master/sorschia_logo.png</PackageIconUrl>
   </PropertyGroup>

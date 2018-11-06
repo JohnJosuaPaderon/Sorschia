@@ -1,8 +1,7 @@
-﻿using Sorschia.Utilities;
-using System;
+﻿using System;
 using System.IO;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     /// <summary>
     /// Exposes functions that converts database values to .NET types.

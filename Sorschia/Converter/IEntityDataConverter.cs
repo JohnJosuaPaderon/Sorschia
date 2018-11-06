@@ -1,6 +1,4 @@
-﻿using Sorschia.Entity;
-
-namespace Sorschia.Converter
+﻿namespace Sorschia
 {
     public interface IEntityDataConverter<T, TId> : IDataConverter<T>
         where T : IEntity<TId>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Sorschia.Process
+namespace Sorschia
 {
     internal sealed class ProcessContext : IProcessContext
     {
@@ -13,7 +13,7 @@ namespace Sorschia.Process
             }
             else
             {
-                throw new ProcessContextException("Failed to add finalizer to process context.");
+                throw new Exception("Failed to add finalizer to process context.");
             }
         }
 

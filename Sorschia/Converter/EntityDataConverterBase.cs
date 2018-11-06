@@ -1,6 +1,4 @@
-﻿using Sorschia.Entity;
-
-namespace Sorschia.Converter
+﻿namespace Sorschia
 {
     public abstract class EntityDataConverterBase<T, TId> : DataConverterBase<T>
         where T : IEntity<TId>

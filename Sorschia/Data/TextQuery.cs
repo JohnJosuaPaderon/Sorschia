@@ -1,4 +1,4 @@
-﻿namespace Sorschia.Data
+﻿namespace Sorschia
 {
     internal sealed class TextQuery : DbQueryBase
     {

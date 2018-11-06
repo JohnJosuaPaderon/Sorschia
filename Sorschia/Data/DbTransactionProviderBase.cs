@@ -1,10 +1,9 @@
-﻿using Sorschia.Process;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Diagnostics;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     /// <summary>
     /// Base-class for managing database transactions

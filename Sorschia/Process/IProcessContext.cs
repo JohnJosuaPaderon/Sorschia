@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sorschia.Process
+namespace Sorschia
 {
     /// <summary>
     /// Represents a collection of information about a process or a series of processes

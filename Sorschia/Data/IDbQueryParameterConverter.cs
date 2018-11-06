@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     public interface IDbQueryParameterConverter<T> where T : DbParameter
     {

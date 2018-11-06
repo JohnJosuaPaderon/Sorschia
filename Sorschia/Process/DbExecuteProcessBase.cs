@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Sorschia.Process
+namespace Sorschia
 {
     public abstract class DbExecuteProcessBase<TCommand, T> : DbProcessBase<TCommand>
         where TCommand : DbCommand

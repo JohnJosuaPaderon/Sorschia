@@ -1,4 +1,4 @@
-﻿namespace Sorschia.Convention
+﻿namespace Sorschia
 {
     internal sealed class FieldNameFormatter : IFieldNameFormatter
     {

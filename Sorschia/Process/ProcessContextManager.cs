@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Sorschia.Process
+namespace Sorschia
 {
     internal sealed class ProcessContextManager : IProcessContextManager
     {
@@ -28,7 +28,7 @@ namespace Sorschia.Process
 
                 if (context.ThrowExceptions)
                 {
-                    throw new ProcessContextException("See innerException", exception);
+                    throw new Exception("See innerException", exception);
                 }
             }
         }
@@ -51,7 +51,7 @@ namespace Sorschia.Process
             }
             else
             {
-                throw new ProcessContextException("Can't finalize process context.");
+                throw new Exception("Can't finalize process context.");
             }
         }
 

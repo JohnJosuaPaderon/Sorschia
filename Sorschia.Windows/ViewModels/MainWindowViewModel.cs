@@ -1,7 +1,6 @@
 ﻿using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
 using Prism.Regions;
-using Sorschia.Configuration;
 using Sorschia.Events;
 using Sorschia.Models;
 

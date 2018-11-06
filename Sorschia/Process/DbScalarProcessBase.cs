@@ -3,7 +3,7 @@ using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Sorschia.Process
+namespace Sorschia
 {
     public abstract class DbScalarProcessBase<TCommand, T> : DbProcessBase<TCommand>
         where TCommand : DbCommand

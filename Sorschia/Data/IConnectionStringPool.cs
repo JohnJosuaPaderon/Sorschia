@@ -1,7 +1,6 @@
-﻿using Sorschia.Process;
-using System.Security;
+﻿using System.Security;
 
-namespace Sorschia.Data
+namespace Sorschia
 {
     public interface IConnectionStringPool
     {

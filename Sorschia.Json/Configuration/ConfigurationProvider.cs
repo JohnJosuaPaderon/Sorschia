@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Sorschia.Configuration
+namespace Sorschia
 {
     internal sealed class ConfigurationProvider : ConfigurationProviderBase, IConfigurationProvider
     {

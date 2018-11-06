@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Sorschia.Configuration
+namespace Sorschia
 {
     public interface IConfigurationProvider
     {

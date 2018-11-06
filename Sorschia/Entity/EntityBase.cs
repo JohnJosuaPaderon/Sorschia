@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sorschia.Entity
+namespace Sorschia
 {
     /// <summary>
     /// Base-class for representational data models
