@@ -17,16 +17,14 @@ namespace Sorschia
             Application.Current.MainWindow.Show();
         }
 
-        protected virtual void ConfigureServices(IServiceCollection services)
+        protected virtual IServiceCollection AddServices(IServiceCollection services)
         {
-
+            return services;
         }
 
         public override void Run(bool runWithDefaultConfiguration)
         {
-            var services = new ServiceCollection();
-            ConfigureServices(services);
-            ServiceStore.Initialize(services.BuildServiceProvider());
+            ServiceStore.Initialize(AddServices(new ServiceCollection()).BuildServiceProvider());
             base.Run(runWithDefaultConfiguration);
         }
     }

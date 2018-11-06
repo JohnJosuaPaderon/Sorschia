@@ -5,10 +5,9 @@ namespace Sorschia.Windows.TestApp
 {
     internal sealed class Bootstrapper : BootstrapperBase
     {
-        protected override void ConfigureServices(IServiceCollection services)
+        protected override IServiceCollection AddServices(IServiceCollection services)
         {
-            base.ConfigureServices(services);
-            services
+            return base.AddServices(services)
                 .AddJsonConfigurationProvider(ConfigurationManager.AppSettings["ConfigurationFile"]);
         }
     }

@@ -105,6 +105,7 @@
     <Compile Include="Converters\ByteArrayBitmapImageConverter.cs" />
     <Compile Include="Converters\MessageBoxButtonVisibilityConverter.cs" />
     <Compile Include="Converters\MessageBoxImagePackIconKindConverter.cs" />
+    <Compile Include="Converters\MonthConverter.cs" />
     <Compile Include="Converters\NullableVisibilityConverter.cs" />
     <Compile Include="Events\MessageBoxEvent.cs" />
     <Compile Include="Events\PopupStateEvent.cs" />
