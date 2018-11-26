@@ -27,7 +27,7 @@ namespace Sorschia
 
                 foreach (var item in Source)
                 {
-                    json.Add(item.Key, new JValue(item.Value));
+                    json.Add(item.Key, JToken.FromObject(item.Value));
                 }
 
                 using (var writer = File.CreateText(SourceFileProvider.Path))

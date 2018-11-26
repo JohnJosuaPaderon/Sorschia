@@ -1,7 +1,6 @@
 ﻿namespace Sorschia
 {
-    public interface IConnectionStringCryptoKeyProvider
+    public interface IConnectionStringCryptoKeyProvider : ICryptoKeyProvider
     {
-        string Key { get; }
     }
 }

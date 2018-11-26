@@ -33,7 +33,7 @@ namespace Sorschia
                     json.Add(new JObject
                     {
                         { FIELD_KEY, item.Key },
-                        { FIELD_VALUE, Crypto.Encrypt(SecureStringConverter.Convert(item.Value), CryptoKeyProvider.Key) }
+                        { FIELD_VALUE, Crypto.Encrypt(SecureStringConverter.Convert(item.Value), CryptoKeyProvider.Request()) }
                     });
                 }
 
@@ -62,7 +62,7 @@ namespace Sorschia
 
                         foreach (JObject item in json)
                         {
-                            result.Add((item[FIELD_KEY].ToString(), Crypto.Decrypt(item[FIELD_VALUE].ToString(), CryptoKeyProvider.Key)));
+                            result.Add((item[FIELD_KEY].ToString(), Crypto.Decrypt(item[FIELD_VALUE].ToString(), CryptoKeyProvider.Request())));
                         }
 
                         return result;

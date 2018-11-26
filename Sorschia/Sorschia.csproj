@@ -4,13 +4,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>5.0.0</Version>
+    <Version>5.0.6-test</Version>
     <Authors>John Josua R. Paderon</Authors>
     <Description>Sorschia Library.</Description>
     <Copyright>Copyright (c) 2018 John Josua R. Paderon</Copyright>
     <Company>Sorschia</Company>
     <PackageTags>Sorschia</PackageTags>
-    <PackageReleaseNotes>Removed unnecessary exception classes, clean-up namespace.</PackageReleaseNotes>
+    <PackageReleaseNotes>Crypto Key Provider.</PackageReleaseNotes>
     <PackageIconUrl>https://raw.githubusercontent.com/JohnJosuaPaderon/Sorschia/master/sorschia_logo.png</PackageIconUrl>
   </PropertyGroup>
 

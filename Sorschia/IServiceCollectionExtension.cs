@@ -25,5 +25,11 @@ namespace Sorschia
                 .AddSingleton<IInformalFullNameBuilder, InformalFullNameBuilder>()
                 .AddSingleton<IMiddleInitialsBuilder, MiddleInitialsBuilder>();
         }
+
+        public static IServiceCollection AddDefaultProcessContextProvider(this IServiceCollection instance)
+        {
+            return instance
+                .AddSingleton<IProcessContextProvider, DefaultProcessContextProvider>();
+        }
     }
 }

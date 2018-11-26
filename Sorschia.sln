@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorschia.Windows", "Sorschi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorschia.Windows.TestApp", "Sorschia.Windows.TestApp\Sorschia.Windows.TestApp.csproj", "{B6FA0716-CE3C-4B4F-B471-E836D7FBE63F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorschia.ConnectionStringManagementApp", "Sorschia.ConnectionStringManagementApp\Sorschia.ConnectionStringManagementApp.csproj", "{A2F4830B-2ED0-4C16-BFCA-4B7B4029D064}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{B6FA0716-CE3C-4B4F-B471-E836D7FBE63F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6FA0716-CE3C-4B4F-B471-E836D7FBE63F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6FA0716-CE3C-4B4F-B471-E836D7FBE63F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2F4830B-2ED0-4C16-BFCA-4B7B4029D064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2F4830B-2ED0-4C16-BFCA-4B7B4029D064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2F4830B-2ED0-4C16-BFCA-4B7B4029D064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2F4830B-2ED0-4C16-BFCA-4B7B4029D064}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

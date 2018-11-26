@@ -28,4 +28,13 @@ namespace Sorschia
             base.Run(runWithDefaultConfiguration);
         }
     }
+
+    public abstract class BootstrapperBase<TMainWindow> : BootstrapperBase
+        where TMainWindow : DependencyObject
+    {
+        protected override DependencyObject CreateShell()
+        {
+            return Container.TryResolve<TMainWindow>();
+        }
+    }
 }

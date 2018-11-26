@@ -10,9 +10,9 @@
     <Copyright>Copyright (c) 2018 John Josua R. Paderon</Copyright>
     <PackageIconUrl>https://raw.githubusercontent.com/JohnJosuaPaderon/Sorschia/master/sorschia_logo.png</PackageIconUrl>
     <PackageTags>Sorschia Json</PackageTags>
-    <PackageReleaseNotes>Removed unnecessary exception classes, clean-up namespace.</PackageReleaseNotes>
+    <PackageReleaseNotes>Crypto Key Provider.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>5.0.0</Version>
+    <Version>5.0.5</Version>
   </PropertyGroup>
 
   <ItemGroup>

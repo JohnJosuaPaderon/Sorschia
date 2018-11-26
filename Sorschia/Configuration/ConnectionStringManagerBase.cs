@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
 
 namespace Sorschia
 {
-    public abstract class ConnectionStringManagerBase
+    public abstract class ConnectionStringManagerBase : IEnumerable<KeyValuePair<string, SecureString>>
     {
         public ConnectionStringManagerBase()
         {
@@ -70,6 +71,29 @@ namespace Sorschia
                         }
                     }
                 }
+
+                IsLoaded = true;
+            }
+        }
+
+        public IEnumerator<KeyValuePair<string, SecureString>> GetEnumerator()
+        {
+            TryLoad();
+            return Source.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public void Remove(string key)
+        {
+            Validator.NullOrWhiteSpace(key, "Invalid key.");
+
+            if (Source.ContainsKey(key))
+            {
+                Source.Remove(key);
             }
         }
     }
